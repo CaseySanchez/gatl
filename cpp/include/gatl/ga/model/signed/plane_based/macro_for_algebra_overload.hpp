@@ -25,12 +25,12 @@
 #define __GA_MODEL_PLANE_BASED_MACRO_FOR_ALGEBRA_OVERLOAD_HPP__
 
 #define _GA_PLANE_BASED_ALGEBRA_OVERLOAD(SPACE) \
-    template <typename... Types, std::enable_if_t<std::disjunction_v<std::bool_constant<!detail::is_iterator_v<Types> >...>, int> = 0> \
+    template <typename... Types> requires (std::disjunction_v<std::bool_constant<!detail::is_iterator_v<Types> >...>) \
     constexpr decltype(auto) euclidean_vector(Types &&... coords) GA_NOEXCEPT { \
         return euclidean_vector(SPACE, std::move(coords)...); \
     } \
     \
-    template <typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0> \
+    template <typename IteratorType> requires (detail::is_iterator_v<IteratorType>) \
     constexpr decltype(auto) euclidean_vector(IteratorType begin, IteratorType end) GA_NOEXCEPT { \
         return euclidean_vector(SPACE, begin, end); \
     }

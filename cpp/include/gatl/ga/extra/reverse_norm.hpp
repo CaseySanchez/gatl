@@ -37,12 +37,12 @@ namespace ga {
         return rnorm_sqr(arg, detail::real_metric_space());
     }
 
-    template<typename Type, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
+    template<typename Type, typename MetricSpaceType> requires(!is_clifford_expression_v<Type>)
     constexpr decltype(auto) rnorm_sqr(Type const &arg, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
         return rnorm_sqr(scalar(arg), detail::real_metric_space());
     }
 
-    template<typename Type, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
+    template<typename Type> requires(!is_clifford_expression_v<Type>)
     constexpr decltype(auto) rnorm_sqr(Type const &arg) GA_NOEXCEPT {
         return rnorm_sqr(scalar(arg), detail::real_metric_space());
     }
@@ -58,12 +58,12 @@ namespace ga {
         return rnorm(arg, detail::real_metric_space());
     }
 
-    template<typename Type, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
+    template<typename Type, typename MetricSpaceType> requires(!is_clifford_expression_v<Type>)
     constexpr decltype(auto) rnorm(Type const &arg, metric_space<MetricSpaceType> const &) {
         return rnorm(scalar(arg), detail::real_metric_space());
     }
 
-    template<typename Type, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
+    template<typename Type> requires(!is_clifford_expression_v<Type>)
     constexpr decltype(auto) rnorm(Type const &arg) {
         return rnorm(scalar(arg), detail::real_metric_space());
     }

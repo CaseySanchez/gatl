@@ -45,7 +45,7 @@ Make sure that you have the following tools before attempting to use GATL.
 
 Required tool:
 
-- Your favorite [C++17](https://en.wikipedia.org/wiki/C%2B%2B17) compiler.
+- Your favorite [C++20](https://en.wikipedia.org/wiki/C%2B%2B20) compiler.
 
 Optional tool:
 

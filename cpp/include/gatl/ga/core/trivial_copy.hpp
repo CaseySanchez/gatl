@@ -64,99 +64,83 @@ namespace ga {
         template<typename InputComponent>
         struct _trivial_check_zero;
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<eq_v<InputBasisBlade, ResultBasisBlade> > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires (eq_v<InputBasisBlade, ResultBasisBlade>)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_assign_and_advance_both<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<eq_v<InputBasisBlade, ResultBasisBlade> > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade> requires(eq_v<InputBasisBlade, ResultBasisBlade>)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_assign_and_advance_both<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<eq_v<InputBasisBlade, ResultBasisBlade> > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires(eq_v<InputBasisBlade, ResultBasisBlade>)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_assign_and_advance_both<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<eq_v<InputBasisBlade, ResultBasisBlade> > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade> requires(eq_v<InputBasisBlade, ResultBasisBlade>)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_assign_and_advance_both<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<lt_v<ResultBasisBlade, InputBasisBlade> > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires (lt_v<ResultBasisBlade, InputBasisBlade>)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_set_zero_and_advance_result<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<ResultBasisBlade, InputBasisBlade> && !std::is_same_v<ResultCoefficient, constant_value<0> > > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<ResultBasisBlade, InputBasisBlade> && !std::is_same_v<ResultCoefficient, constant_value<0> >)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_set_zero_and_advance_result<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<ResultBasisBlade, InputBasisBlade> && std::is_same_v<ResultCoefficient, constant_value<0> > && RuntimeCheck> > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<ResultBasisBlade, InputBasisBlade> && std::is_same_v<ResultCoefficient, constant_value<0> > && RuntimeCheck)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_check_zero_and_advance_input<add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<lt_v<ResultBasisBlade, InputBasisBlade> > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires (lt_v<ResultBasisBlade, InputBasisBlade>)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_set_zero_and_advance_result<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<ResultBasisBlade, InputBasisBlade> && !std::is_same_v<ResultCoefficient, constant_value<0> > > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<ResultBasisBlade, InputBasisBlade> && !std::is_same_v<ResultCoefficient, constant_value<0> >)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_set_zero_and_advance_result<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<ResultBasisBlade, InputBasisBlade> && std::is_same_v<ResultCoefficient, constant_value<0> > && RuntimeCheck> > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<ResultBasisBlade, InputBasisBlade> && std::is_same_v<ResultCoefficient, constant_value<0> > && RuntimeCheck)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_check_zero_and_advance_input<component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<lt_v<InputBasisBlade, ResultBasisBlade> && RuntimeCheck> > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires (lt_v<InputBasisBlade, ResultBasisBlade> && RuntimeCheck)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_check_zero_and_advance_input<add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<InputBasisBlade, ResultBasisBlade> && RuntimeCheck> > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename... NextInputArguments, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<InputBasisBlade, ResultBasisBlade> && RuntimeCheck)
+        struct _trivial_copy<RuntimeCheck, add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_check_zero_and_advance_input<add<component<InputCoefficient, InputBasisBlade>, NextInputArguments...>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<lt_v<InputBasisBlade, ResultBasisBlade> && !std::is_same_v<InputCoefficient, constant_value<0> > && RuntimeCheck> > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires (lt_v<InputBasisBlade, ResultBasisBlade> && !std::is_same_v<InputCoefficient, constant_value<0> > && RuntimeCheck)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_check_zero_and_advance_input<component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>,
-            std::enable_if_t<lt_v<InputBasisBlade, ResultBasisBlade> && std::is_same_v<InputCoefficient, constant_value<0> > > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade, typename... NextResultArguments> requires (lt_v<InputBasisBlade, ResultBasisBlade> && std::is_same_v<InputCoefficient, constant_value<0> >)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...>> :
             _trivial_set_zero_and_advance_result<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, add<component<ResultCoefficient, ResultBasisBlade>, NextResultArguments...> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<InputBasisBlade, ResultBasisBlade> && !std::is_same_v<InputCoefficient, constant_value<0> > && RuntimeCheck> > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<InputBasisBlade, ResultBasisBlade> && !std::is_same_v<InputCoefficient, constant_value<0> > && RuntimeCheck)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_check_zero_and_advance_input<component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 
-        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade>
-        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>,
-            std::enable_if_t<lt_v<InputBasisBlade, ResultBasisBlade> && std::is_same_v<InputCoefficient, constant_value<0> > > > :
+        template<bool RuntimeCheck, typename InputCoefficient, typename InputBasisBlade, typename ResultCoefficient, typename ResultBasisBlade> requires (lt_v<InputBasisBlade, ResultBasisBlade> && std::is_same_v<InputCoefficient, constant_value<0> >)
+        struct _trivial_copy<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade>> :
             _trivial_set_zero_and_advance_result<RuntimeCheck, component<InputCoefficient, InputBasisBlade>, component<ResultCoefficient, ResultBasisBlade> > {
         };
 

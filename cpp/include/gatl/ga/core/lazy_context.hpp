@@ -468,7 +468,7 @@ namespace ga {
             > {
         };
         
-        template<tag_t LowerTag, tag_t UpperTag, typename CoefficientType, typename Expression, typename... InputTypes, std::enable_if_t<(LowerTag <= UpperTag), int> = 0>
+        template<tag_t LowerTag, tag_t UpperTag, typename CoefficientType, typename Expression, typename... InputTypes> requires ((LowerTag <= UpperTag))
         GA_ALWAYS_INLINE constexpr static decltype(auto) eval(clifford_expression<CoefficientType, Expression> const &, std::tuple<InputTypes...> const &args) {
             using result_type = clifford_expression<eval_coefficient_t<LowerTag, UpperTag, Expression, std::remove_const_t<std::remove_reference_t<InputTypes> >...>, eval_expression_t<LowerTag, UpperTag, Expression> >;
 
@@ -485,7 +485,7 @@ namespace ga {
             return result_type(std::move(values), std::move(bitsets), std::move(maps));
         }
 
-        template<tag_t LowerTag, tag_t UpperTag, typename CoefficientType, typename Expression, typename... InputTypes, std::enable_if_t<(LowerTag > UpperTag), int> = 0>
+        template<tag_t LowerTag, tag_t UpperTag, typename CoefficientType, typename Expression, typename... InputTypes> requires ((LowerTag > UpperTag))
         GA_ALWAYS_INLINE constexpr static decltype(auto) eval(clifford_expression<CoefficientType, Expression> const &, std::tuple<InputTypes...> const &) {
             return clifford_expression<CoefficientType, Expression>();
         }
