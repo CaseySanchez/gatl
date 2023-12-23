@@ -48,6 +48,31 @@ namespace ga {
     template<typename Type>
     constexpr bool is_clifford_expression_v = is_clifford_expression<Type>::value;
 
+    template<typename Type>
+    concept CliffordExpressionType = is_clifford_expression_v<Type>;
+
+    template<typename Type>
+    concept NonCliffordExpressionType = !is_clifford_expression_v<Type>;
+
+    template<typename Type>
+    struct is_scalar_clifford_expression :
+        std::false_type {
+    };
+
+    template<typename CoefficientType, typename Coefficient>
+    struct is_scalar_clifford_expression<clifford_expression<CoefficientType, detail::component<Coefficient, detail::constant_basis_blade<bitset_t(0)> > > > :
+        std::true_type {
+    };
+
+    template<typename Type>
+    constexpr bool is_scalar_clifford_expression_v = is_scalar_clifford_expression<Type>::value;
+
+    template<typename Type>
+    concept ScalarCliffordExpressionType = is_scalar_clifford_expression_v<Type>;
+
+    template<typename Type>
+    concept NonScalarCliffordExpressionType = !is_scalar_clifford_expression_v<Type> && is_clifford_expression_v<Type>;
+
     namespace detail {
 
         // Returns the number of values stored by the given expression.
@@ -710,7 +735,7 @@ namespace ga {
         constexpr clifford_expression & operator=(clifford_expression const &) = default;
         constexpr clifford_expression & operator=(clifford_expression &&) = default;
 
-        template<typename Type> requires (!is_clifford_expression_v<Type> && detail::is_scalar_component_v<Expression> && detail::can_be_stored_v<Expression>)
+        template<NonCliffordExpressionType Type> requires (detail::is_scalar_component_v<Expression> && detail::can_be_stored_v<Expression>)
         constexpr operator Type() const GA_NOEXCEPT {
             return detail::_clifford_expression_to_native<Expression>::eval(super::values().cbegin());
         }

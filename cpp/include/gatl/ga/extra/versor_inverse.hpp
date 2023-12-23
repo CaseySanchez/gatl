@@ -37,13 +37,12 @@ namespace ga {
         return pow(arg, c<-1>);
     }
 
-    template<typename Type, typename MetricSpaceType> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) inv(Type const &arg, metric_space<MetricSpaceType> const &) {
+    template<typename MetricSpaceType>
+    constexpr decltype(auto) inv(NonCliffordExpressionType auto const &arg, metric_space<MetricSpaceType> const &) {
         return pow(scalar(arg), c<-1>);
     }
 
-    template<typename Type> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) inv(Type const &arg) {
+    constexpr decltype(auto) inv(NonCliffordExpressionType auto const &arg) {
         return pow(scalar(arg), c<-1>);
     }
 

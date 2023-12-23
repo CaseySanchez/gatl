@@ -79,6 +79,11 @@ namespace ga {
     template<typename Type>
     constexpr bool is_metric_space_v = is_metric_space<Type>::value;
 
+    template<typename Type>
+    concept MetricSpaceType = is_metric_space_v<Type>;
+
+    template<typename Type>
+    concept NonMetricSpaceType = !is_metric_space_v<Type>;
 }
 
 #endif // __GA_CORE_METRIC_SPACE_HPP__

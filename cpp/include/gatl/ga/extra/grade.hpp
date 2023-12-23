@@ -245,8 +245,8 @@ namespace ga {
         return detail::make_grade_result(lazy.eval(scalar_clifford_expression<grade_t, detail::deduce_grade_result_t<typename decltype(lazy)::template argument_expression_t<0>, detail::coefficient_t<typename decltype(lazy)::template argument_expression_t<1> > > >()));
     }
 
-    template<typename Type, typename ToleranceType> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) grade(Type const &arg, ToleranceType const &tol) GA_NOEXCEPT {
+    template<typename ToleranceType>
+    constexpr decltype(auto) grade(NonCliffordExpressionType auto const &arg, ToleranceType const &tol) GA_NOEXCEPT {
         return grade(scalar(arg), tol);
     }
 
@@ -255,9 +255,8 @@ namespace ga {
         return grade(arg, default_tolerance<CoefficientType>());
     }
 
-    template<typename Type> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) grade(Type const &arg) GA_NOEXCEPT {
-        return grade(scalar(arg), default_tolerance<Type>());
+    constexpr decltype(auto) grade(NonCliffordExpressionType auto const &arg) GA_NOEXCEPT {
+        return grade(scalar(arg), default_tolerance<typename std::remove_cvref_t<decltype(arg)>>());
     }
 
     // Returns a scalar expression with the largest grade part of a given Clifford expression such that it is not zero.
@@ -267,8 +266,8 @@ namespace ga {
         return lazy.eval(scalar_clifford_expression<grade_t, detail::deduce_largest_grade_result_t<typename decltype(lazy)::template argument_expression_t<0>, detail::coefficient_t<typename decltype(lazy)::template argument_expression_t<1> > > >());
     }
 
-    template<typename Type, typename ToleranceType> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) largest_grade(Type const &arg, ToleranceType const &tol) GA_NOEXCEPT {
+    template<typename ToleranceType>
+    constexpr decltype(auto) largest_grade(NonCliffordExpressionType auto const &arg, ToleranceType const &tol) GA_NOEXCEPT {
         return largest_grade(scalar(arg), tol);
     }
 
@@ -277,9 +276,8 @@ namespace ga {
         return largest_grade(arg, default_tolerance<CoefficientType>());
     }
 
-    template<typename Type> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) largest_grade(Type const &arg) GA_NOEXCEPT {
-        return largest_grade(scalar(arg), default_tolerance<Type>());
+    constexpr decltype(auto) largest_grade(NonCliffordExpressionType auto const &arg) GA_NOEXCEPT {
+        return largest_grade(scalar(arg), default_tolerance<typename std::remove_cvref_t<decltype(arg)>>());
     }
 
 }

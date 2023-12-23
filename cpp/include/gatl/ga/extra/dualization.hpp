@@ -32,8 +32,8 @@ namespace ga {
         return lazy.eval(lcont(arg_, inv(pseudoscalar_, mtr), mtr));
     }
 
-    template<typename Type, typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) dual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) {
+    template<typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType>
+    constexpr decltype(auto) dual(NonCliffordExpressionType auto const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) {
         return dual(scalar(arg), pseudoscalar, mtr);
     }
 
@@ -43,8 +43,8 @@ namespace ga {
         return lazy.eval(lcont(arg_, pseudoscalar_, mtr));
     }
 
-    template<typename Type, typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType> requires(!is_clifford_expression_v<Type>)
-    constexpr decltype(auto) undual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
+    template<typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType>
+    constexpr decltype(auto) undual(NonCliffordExpressionType auto const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
         return undual(scalar(arg), pseudoscalar, mtr);
     }
 
