@@ -37,33 +37,32 @@ namespace ga {
         return igp(lhs, rhs, detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType, typename MetricSpaceType> requires (!is_clifford_expression_v<RightType>)
-    constexpr decltype(auto) igp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs, metric_space<MetricSpaceType> const &) {
+    template<typename LeftCoefficientType, typename LeftExpression, typename MetricSpaceType>
+    constexpr decltype(auto) igp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs, metric_space<MetricSpaceType> const &) {
         return igp(lhs, scalar(rhs), detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType> requires (!is_clifford_expression_v<RightType>)
-    constexpr decltype(auto) igp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs) {
+    template<typename LeftCoefficientType, typename LeftExpression>
+    constexpr decltype(auto) igp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs) {
         return igp(lhs, scalar(rhs), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression, typename MetricSpaceType> requires (!is_clifford_expression_v<LeftType>)
-    constexpr decltype(auto) igp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
+    template<typename RightCoefficientType, typename RightExpression, typename MetricSpaceType>
+    constexpr decltype(auto) igp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
         return igp(scalar(lhs), rhs, mtr);
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightCoefficient> requires (!is_clifford_expression_v<LeftType>)
-    constexpr decltype(auto) igp(LeftType const &lhs, scalar_clifford_expression<RightCoefficientType, RightCoefficient> const &rhs) {
+    template<typename RightCoefficientType, typename RightCoefficient>
+    constexpr decltype(auto) igp(NonCliffordExpressionType auto const &lhs, scalar_clifford_expression<RightCoefficientType, RightCoefficient> const &rhs) {
         return igp(scalar(lhs), rhs, detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightType, typename MetricSpaceType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>))
-    constexpr decltype(auto) igp(LeftType const &lhs, RightType const &rhs, metric_space<MetricSpaceType> const &) {
+    template<typename MetricSpaceType>
+    constexpr decltype(auto) igp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs, metric_space<MetricSpaceType> const &) {
         return igp(scalar(lhs), scalar(rhs), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>))
-    constexpr decltype(auto) igp(LeftType const &lhs, RightType const &rhs) {
+    constexpr decltype(auto) igp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs) {
         return igp(scalar(lhs), scalar(rhs), detail::real_metric_space());
     }
 

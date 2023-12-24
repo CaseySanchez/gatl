@@ -47,33 +47,33 @@ namespace ga {
         return dp(lhs, rhs, tol, detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType, typename ToleranceType, typename MetricSpaceType> requires (!is_clifford_expression_v<RightType>)
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
+    template<typename LeftCoefficientType, typename LeftExpression, typename ToleranceType, typename MetricSpaceType>
+    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
         return dp(lhs, scalar(rhs), tol, detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType, typename ToleranceType> requires (!(is_clifford_expression_v<RightType> || is_metric_space_v<ToleranceType>))
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs, ToleranceType const &tol) GA_NOEXCEPT {
+    template<typename LeftCoefficientType, typename LeftExpression, typename ToleranceType> requires (!is_metric_space_v<ToleranceType>)
+    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs, ToleranceType const &tol) GA_NOEXCEPT {
         return dp(lhs, scalar(rhs), tol, detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression, typename ToleranceType, typename MetricSpaceType> requires (!is_clifford_expression_v<LeftType>)
-    constexpr decltype(auto) dp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
+    template<typename RightCoefficientType, typename RightExpression, typename ToleranceType, typename MetricSpaceType>
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
         return dp(scalar(lhs), rhs, tol, detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression, typename ToleranceType> requires (!(is_clifford_expression_v<LeftType> || is_metric_space_v<ToleranceType>))
-    constexpr decltype(auto) dp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) GA_NOEXCEPT {
+    template<typename RightCoefficientType, typename RightExpression, typename ToleranceType> requires (!is_metric_space_v<ToleranceType>)
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) GA_NOEXCEPT {
         return dp(scalar(lhs), rhs, tol, detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightType, typename ToleranceType, typename MetricSpaceType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>))
-    constexpr decltype(auto) dp(LeftType const &lhs, RightType const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
+    template<typename ToleranceType, typename MetricSpaceType>
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
         return dp(scalar(lhs), scalar(rhs), tol, detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightType, typename ToleranceType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType> || is_metric_space_v<ToleranceType>))
-    constexpr decltype(auto) dp(LeftType const &lhs, RightType const &rhs, ToleranceType const &tol) GA_NOEXCEPT {
+    template<typename ToleranceType> requires (!is_metric_space_v<ToleranceType>)
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs, ToleranceType const &tol) GA_NOEXCEPT {
         return dp(scalar(lhs), scalar(rhs), tol, detail::real_metric_space());
     }
 
@@ -97,34 +97,33 @@ namespace ga {
         return dp(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType, typename MetricSpaceType> requires (!is_clifford_expression_v<RightType>)
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
-        return dp(lhs, scalar(rhs), default_tolerance<std::common_type_t<LeftCoefficientType, RightType> >(), detail::real_metric_space());
+    template<typename LeftCoefficientType, typename LeftExpression, typename MetricSpaceType>
+    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
+        return dp(lhs, scalar(rhs), default_tolerance<std::common_type_t<LeftCoefficientType, std::remove_cvref_t<decltype(rhs)> > >(), detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType> requires (!is_clifford_expression_v<RightType>)
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs) GA_NOEXCEPT {
-        return dp(lhs, scalar(rhs), default_tolerance<std::common_type_t<LeftCoefficientType, RightType> >(), detail::real_metric_space());
+    template<typename LeftCoefficientType, typename LeftExpression>
+    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs) GA_NOEXCEPT {
+        return dp(lhs, scalar(rhs), default_tolerance<std::common_type_t<LeftCoefficientType, std::remove_cvref_t<decltype(rhs)> > >(), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression, typename MetricSpaceType> requires (!is_clifford_expression_v<LeftType>)
-    constexpr decltype(auto) dp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
-        return dp(scalar(lhs), rhs, default_tolerance<std::common_type_t<LeftType, RightCoefficientType> >(), detail::real_metric_space());
+    template<typename RightCoefficientType, typename RightExpression, typename MetricSpaceType>
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
+        return dp(scalar(lhs), rhs, default_tolerance<std::common_type_t<std::remove_cvref_t<decltype(lhs)>, RightCoefficientType> >(), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression> requires (!is_clifford_expression_v<LeftType>)
-    constexpr decltype(auto) dp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT {
-        return dp(scalar(lhs), rhs, default_tolerance<std::common_type_t<LeftType, RightCoefficientType> >(), detail::real_metric_space());
+    template<typename RightCoefficientType, typename RightExpression>
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT {
+        return dp(scalar(lhs), rhs, default_tolerance<std::common_type_t<std::remove_cvref_t<decltype(lhs)>, RightCoefficientType> >(), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightType, typename MetricSpaceType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>))
-    constexpr decltype(auto) dp(LeftType const &lhs, RightType const &rhs, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
-        return dp(scalar(lhs), scalar(rhs), default_tolerance<std::common_type_t<LeftType, RightType> >(), detail::real_metric_space());
+    template<typename MetricSpaceType>
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs, metric_space<MetricSpaceType> const &) GA_NOEXCEPT {
+        return dp(scalar(lhs), scalar(rhs), default_tolerance<std::common_type_t<std::remove_cvref_t<decltype(lhs)>, std::remove_cvref_t<decltype(rhs)> > >(), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>))
-    constexpr decltype(auto) dp(LeftType const &lhs, RightType const &rhs) GA_NOEXCEPT {
-        return dp(scalar(lhs), scalar(rhs), default_tolerance<std::common_type_t<LeftType, RightType> >(), detail::real_metric_space());
+    constexpr decltype(auto) dp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs) GA_NOEXCEPT {
+        return dp(scalar(lhs), scalar(rhs), default_tolerance<std::common_type_t<std::remove_cvref_t<decltype(lhs)>, std::remove_cvref_t<decltype(rhs)> > >(), detail::real_metric_space());
     }
 
 }
