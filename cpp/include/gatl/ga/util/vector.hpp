@@ -124,7 +124,7 @@ namespace ga {
 
             template<typename... ValueTypes>
             GA_ALWAYS_INLINE constexpr static decltype(auto) to_sequential_storage(std::tuple<ValueTypes...> &&tuple) GA_NOEXCEPT {
-                return to_sequential_storage(std::move(tuple), std::make_index_sequence<std::tuple_size_v<std::remove_cv_t<std::remove_reference_t<std::tuple<ValueTypes...> > > > >{});
+                return to_sequential_storage(std::move(tuple), std::make_index_sequence<std::tuple_size_v<std::remove_cvref_t<std::tuple<ValueTypes...> > > >{});
             }
 
         public:
@@ -140,7 +140,7 @@ namespace ga {
         struct make_vector {
             template<typename... Types>
             GA_ALWAYS_INLINE constexpr static CliffordExpression run(Types &&... coords) GA_NOEXCEPT {
-                return CliffordExpression(std::conditional_t<std::disjunction_v<std::bool_constant<is_clifford_expression_v<std::remove_cv_t<std::remove_reference_t<Types> > > >...>, detail::make_vector_sequential_storage_not_simple, detail::make_vector_sequential_storage_simple>::run(std::move(coords)...));
+                return CliffordExpression(std::conditional_t<std::disjunction_v<std::bool_constant<is_clifford_expression_v<std::remove_cvref_t<Types> > >...>, detail::make_vector_sequential_storage_not_simple, detail::make_vector_sequential_storage_simple>::run(std::move(coords)...));
             }
         };
 
@@ -158,7 +158,7 @@ namespace ga {
     template<typename MetricSpaceType, typename... Types> requires (std::disjunction_v<std::bool_constant<!detail::is_iterator_v<Types> >...>)
     constexpr decltype(auto) vector(metric_space<MetricSpaceType> const &, Types &&... coords) GA_NOEXCEPT {
         static_assert(MetricSpaceType::vector_space_dimensions == sizeof...(Types), "The number of coordinates must be equal to the number of dimensions of the vector space.");
-        return detail::make_vector<detail::deduce_vector_t<MetricSpaceType::vector_space_dimensions, std::remove_cv_t<std::remove_reference_t<Types> >...> >::run(std::move(coords)...);
+        return detail::make_vector<detail::deduce_vector_t<MetricSpaceType::vector_space_dimensions, std::remove_cvref_t<Types>...> >::run(std::move(coords)...);
     }
 
     namespace detail {

@@ -744,7 +744,7 @@ namespace ga {
     // Helper function to build a sequential storage of values, bitsets or maps.
     template<typename... Args>
     constexpr decltype(auto) make_sequential_storage(Args &&... args) GA_NOEXCEPT {
-        return detail::sequential_storage<std::common_type_t<std::remove_cv_t<std::remove_reference_t<Args> >...>, sizeof...(args)>(std::move(args)...);
+        return detail::sequential_storage<std::common_type_t<std::remove_cvref_t<Args>...>, sizeof...(args)>(std::move(args)...);
     }
 
 }

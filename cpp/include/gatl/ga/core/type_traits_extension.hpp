@@ -52,7 +52,7 @@ namespace ga {
 
         template<typename Tuple>
         GA_ALWAYS_INLINE constexpr decltype(auto) to_list_initialization(Tuple &&tuple) GA_NOEXCEPT {
-            return _to_list_initialization(std::move(tuple), std::make_index_sequence<std::tuple_size_v<std::remove_cv_t<std::remove_reference_t<Tuple> > > >{});
+            return _to_list_initialization(std::move(tuple), std::make_index_sequence<std::tuple_size_v<std::remove_cvref_t<Tuple> > >{});
         }
 
     }
