@@ -45,8 +45,8 @@
         return cp(lhs, rhs, SPACE); \
     } \
     \
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType> requires (!is_metric_space_v<ToleranceType>) \
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) GA_NOEXCEPT { \
+    template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
+    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, NonMetricSpaceType auto const &tol) GA_NOEXCEPT { \
         return dp(lhs, rhs, tol, SPACE); \
     } \
     \
@@ -65,8 +65,8 @@
         return dual(arg, pseudoscalar(SPACE), SPACE); \
     } \
     \
-    template<typename CoefficientType, typename Expression, typename ToleranceType> requires (!is_metric_space_v<ToleranceType>) \
-    constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) { \
+    template<typename CoefficientType, typename Expression> \
+    constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, NonMetricSpaceType auto const &tol) { \
         return exp(arg, tol, SPACE); \
     } \
     \
