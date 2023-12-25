@@ -31,13 +31,13 @@ namespace ga {
         return igp(lhs, rhs, detail::real_metric_space());
     }
 
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType> requires (!is_clifford_expression_v<RightType>)
-    constexpr decltype(auto) operator/(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs) GA_NOEXCEPT {
+    template<typename LeftCoefficientType, typename LeftExpression>
+    constexpr decltype(auto) operator/(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs) GA_NOEXCEPT {
         return igp(lhs, scalar(rhs), detail::real_metric_space());
     }
 
-    template<typename LeftType, typename RightCoefficientType, typename RightCoefficient> requires (!is_clifford_expression_v<LeftType>)
-    constexpr decltype(auto) operator/(LeftType const &lhs, scalar_clifford_expression<RightCoefficientType, RightCoefficient> const &rhs) GA_NOEXCEPT {
+    template<typename RightCoefficientType, typename RightCoefficient>
+    constexpr decltype(auto) operator/(NonCliffordExpressionType auto const &lhs, scalar_clifford_expression<RightCoefficientType, RightCoefficient> const &rhs) GA_NOEXCEPT {
         return igp(scalar(lhs), rhs, detail::real_metric_space());
     }
 

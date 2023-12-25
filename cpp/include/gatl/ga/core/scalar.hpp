@@ -34,14 +34,12 @@ namespace ga {
     using unit_scalar_t = scalar_clifford_expression<default_integral_t, detail::constant_value<1> >;
 
     // Converts the given native value type to scalar Clifford expression.
-    template<typename ValueType> requires (!is_clifford_expression_v<ValueType>)
-    constexpr scaled_scalar_t<ValueType> scalar(ValueType const &arg) GA_NOEXCEPT {
-        return scaled_scalar_t<ValueType>(make_sequential_storage(arg));
+    constexpr decltype(auto) scalar(NonCliffordExpressionType auto const &arg) GA_NOEXCEPT {
+        return scaled_scalar_t<std::remove_cvref_t<decltype(arg)> >(make_sequential_storage(arg));
     }
 
-    template<typename ValueType> requires (!is_clifford_expression_v<ValueType>)
-    constexpr decltype(auto) scalar(ValueType &&arg) GA_NOEXCEPT {
-        return scaled_scalar_t<std::remove_cv_t<std::remove_reference_t<ValueType> > >(make_sequential_storage(std::move(arg)));
+    constexpr decltype(auto) scalar(NonCliffordExpressionType auto &&arg) GA_NOEXCEPT {
+        return scaled_scalar_t<std::remove_cvref_t<decltype(arg)> >(make_sequential_storage(std::move(arg)));
     }
 
     template<typename CoefficientType, typename Coefficient>

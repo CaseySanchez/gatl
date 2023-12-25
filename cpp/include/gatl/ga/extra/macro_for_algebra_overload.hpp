@@ -110,8 +110,8 @@
         return igp(lhs, rhs, SPACE); \
     } \
     \
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression> requires (!is_clifford_expression_v<LeftType>) \
-    constexpr decltype(auto) igp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+    template<typename RightCoefficientType, typename RightExpression> \
+    constexpr decltype(auto) igp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
         return igp(lhs, rhs, SPACE); \
     } \
     \

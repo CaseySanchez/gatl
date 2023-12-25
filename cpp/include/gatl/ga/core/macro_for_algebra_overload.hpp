@@ -85,18 +85,17 @@
         return rp(lhs, rhs, SPACE); \
     } \
     \
-    template<typename LeftCoefficientType, typename LeftExpression, typename RightType> requires (!is_clifford_expression_v<RightType>) \
-    constexpr decltype(auto) rp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs) GA_NOEXCEPT { \
+    template<typename LeftCoefficientType, typename LeftExpression> \
+    constexpr decltype(auto) rp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, NonCliffordExpressionType auto const &rhs) GA_NOEXCEPT { \
         return rp(lhs, scalar(rhs), SPACE); \
     } \
     \
-    template<typename LeftType, typename RightCoefficientType, typename RightExpression> requires (!is_clifford_expression_v<LeftType>) \
-    constexpr decltype(auto) rp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+    template<typename RightCoefficientType, typename RightExpression> \
+    constexpr decltype(auto) rp(NonCliffordExpressionType auto const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
         return rp(scalar(lhs), rhs, SPACE); \
     } \
     \
-    template<typename LeftType, typename RightType> requires (!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>)) \
-    constexpr decltype(auto) rp(LeftType const &lhs, RightType const &rhs) GA_NOEXCEPT { \
+    constexpr decltype(auto) rp(NonCliffordExpressionType auto const &lhs, NonCliffordExpressionType auto const &rhs) GA_NOEXCEPT { \
         return rp(scalar(lhs), scalar(rhs), SPACE); \
     } \
     \
