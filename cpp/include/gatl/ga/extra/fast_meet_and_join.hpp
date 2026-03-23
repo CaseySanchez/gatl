@@ -30,7 +30,7 @@ namespace ga {
 
         // Implementation of the ga::fast_join() function.
         template<ndims_t N, typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType>
-        GA_ALWAYS_INLINE constexpr decltype(auto) _fast_join_impl(bool const extra_sign_change, clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, grade_t const grade_lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, grade_t const grade_rhs, ToleranceType const &tol) {
+        GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr decltype(auto) _fast_join_impl(bool const extra_sign_change, clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, grade_t const grade_lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, grade_t const grade_rhs, ToleranceType const &tol) {
             using std::abs;
             using value_type = std::common_type_t<LeftCoefficientType, RightCoefficientType>;
             using largest_type = full_derived_multivector_t<default_integral_t, RightExpression>;
@@ -107,7 +107,7 @@ namespace ga {
 
     // Returns the join of the given pair of blades. This function does not allow lazy evaluation. The algorithm is described in D. Fontijne (2008), "Efficient algorithms for factorization and join of blades", In Proc. of the AGACSE, Springer.
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType, typename MetricSpaceType>
-    constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) {
         auto const tol_ = scalar(tol);
         grade_t const grade_lhs = grade(lhs, tol_);
         grade_t const grade_rhs = grade(rhs, tol_);
@@ -115,20 +115,20 @@ namespace ga {
     }
 
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename MetricSpaceType>
-    constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
         return fast_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), mtr);
     }
 
     // Returns a std::tuple<T1, T2> structure where T1 is the meet and T2 is the join of the given pair of blades. This function does not allow lazy evaluation with arguments from a lazy context. The algorithm is described in D. Fontijne (2008), "Efficient algorithms for factorization and join of blades", In Proc. of the AGACSE, Springer.
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType, typename MetricSpaceType>
-    constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) {
         auto const join = fast_join(lhs, rhs, scalar(tol), mtr);
         auto const meet = lcont(lcont(rhs, inv(join, detail::real_metric_space()), detail::real_metric_space()), lhs, detail::real_metric_space());
         return std::make_tuple(meet, join);
     }
 
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename MetricSpaceType>
-    constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
         return fast_meet_and_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), mtr);
     }
 

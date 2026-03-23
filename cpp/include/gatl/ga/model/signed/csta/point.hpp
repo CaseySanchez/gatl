@@ -36,7 +36,7 @@ namespace ga {
     // Basis order in vector(mtr, ...):
     //   (et_coeff, ep_coeff, ex_coeff, ey_coeff, ez_coeff, em_coeff)
     template<typename T, typename X, typename Y, typename Z>
-    constexpr decltype(auto) point(csta_metric_space const &mtr, T &&t, X &&x, Y &&y, Z &&z) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) point(csta_metric_space const &mtr, T &&t, X &&x, Y &&y, Z &&z) GA_NOEXCEPT {
         auto aux = t * t - x * x - y * y - z * z;
         return vector(mtr, std::move(t), (aux - c<1>) / c<2>, std::move(x), std::move(y), std::move(z), (aux + c<1>) / c<2>);
     }
@@ -45,7 +45,7 @@ namespace ga {
 
         // Helper function to adapt the iterator-based point().
         template<typename IteratorType, std::size_t... Indices>
-        GA_ALWAYS_INLINE constexpr decltype(auto) make_csta_point_using_iterator(csta_metric_space const &mtr, IteratorType begin, std::index_sequence<Indices...>) GA_NOEXCEPT {
+        GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr decltype(auto) make_csta_point_using_iterator(csta_metric_space const &mtr, IteratorType begin, std::index_sequence<Indices...>) GA_NOEXCEPT {
             return point(mtr, *(begin + Indices)...);
         }
 
@@ -54,7 +54,7 @@ namespace ga {
     // Initializes a multivector representation of a conformal spacetime point
     // using the given iterator to provide the four coordinates (t, x, y, z).
     template<typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0>
-    constexpr decltype(auto) point(csta_metric_space const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) point(csta_metric_space const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
         assert(4 == std::distance(begin, end));
         return detail::make_csta_point_using_iterator(mtr, begin, std::make_index_sequence<4>{});
     }

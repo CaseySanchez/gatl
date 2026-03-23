@@ -28,7 +28,7 @@ namespace ga {
 
     // Returns the location parameter of a given dual flat.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) dual_flat_location(clifford_expression<CoefficientType, Expression> const &dual_flat, conformal_metric_space<D> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_flat_location(clifford_expression<CoefficientType, Expression> const &dual_flat, conformal_metric_space<D> const &mtr) {
         auto [lazy, dual_flat_] = make_lazy_context_tuple(dual_flat);
         constexpr auto no = e(c<D + 1>);
         return lazy.eval(rcont(op(no, dual_flat_, mtr), inv(dual_flat_, mtr), mtr));
@@ -36,7 +36,7 @@ namespace ga {
 
     // Returns the location parameter of a given primal flat.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) primal_flat_location(clifford_expression<CoefficientType, Expression> const &primal_flat, conformal_metric_space<D> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_flat_location(clifford_expression<CoefficientType, Expression> const &primal_flat, conformal_metric_space<D> const &mtr) {
         auto [lazy, primal_flat_] = make_lazy_context_tuple(primal_flat);
         constexpr auto no = e(c<D + 1>);
         return lazy.eval(lcont(lcont(no, primal_flat_, mtr), inv(primal_flat_, mtr), mtr));

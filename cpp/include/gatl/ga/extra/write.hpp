@@ -162,7 +162,7 @@ namespace ga {
                     }
                 }
                 else {
-                    os << c<0>;
+                    os << static_cast<default_integral_t>(c<0>);
                 }
                 os << "]";
                 std::advance(map_citr, 1);

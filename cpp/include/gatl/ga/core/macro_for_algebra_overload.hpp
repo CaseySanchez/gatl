@@ -26,83 +26,83 @@
 
 #define _GA_CORE_OVERLOAD(SPACE) \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) dot(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return dot(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) dot(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return dot(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression > \
-    constexpr decltype(auto) operator|(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return dot(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) operator|(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return dot(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) gp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return gp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) gp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return gp(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression > \
-    constexpr decltype(auto) operator*(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return gp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) operator*(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return gp(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) hip(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return hip(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) hip(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return hip(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) lcont(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return lcont(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) lcont(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return lcont(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression > \
-    constexpr decltype(auto) operator<(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return lcont(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) operator<(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return lcont(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) op(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return op(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) op(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return op(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression > \
-    constexpr decltype(auto) operator^(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return op(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) operator^(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return op(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) rcont(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return rcont(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rcont(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return rcont(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression > \
-    constexpr decltype(auto) operator>(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return rcont(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) operator>(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return rcont(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) rp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return rp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return rp(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightType, std::enable_if_t<!is_clifford_expression_v<RightType>, int> = 0> \
-    constexpr decltype(auto) rp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs) GA_NOEXCEPT { \
-        return rp(lhs, scalar(rhs), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, RightType const &rhs) GA_NOEXCEPT { \
+        return rp(lhs, scalar(rhs), decltype(SPACE){}); \
     } \
     \
     template<typename LeftType, typename RightCoefficientType, typename RightExpression, std::enable_if_t<!is_clifford_expression_v<LeftType>, int> = 0> \
-    constexpr decltype(auto) rp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return rp(scalar(lhs), rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return rp(scalar(lhs), rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftType, typename RightType, std::enable_if_t<!(is_clifford_expression_v<LeftType> || is_clifford_expression_v<RightType>), int> = 0> \
-    constexpr decltype(auto) rp(LeftType const &lhs, RightType const &rhs) GA_NOEXCEPT { \
-        return rp(scalar(lhs), scalar(rhs), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rp(LeftType const &lhs, RightType const &rhs) GA_NOEXCEPT { \
+        return rp(scalar(lhs), scalar(rhs), decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) sp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return sp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) sp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return sp(lhs, rhs, decltype(SPACE){}); \
     }
 
 #endif // __GA_CORE_MACRO_FOR_ALGEBRA_OVERLOAD_HPP__

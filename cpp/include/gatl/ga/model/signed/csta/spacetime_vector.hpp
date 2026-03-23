@@ -30,7 +30,7 @@ namespace ga {
     // using coordinates (t, x, y, z) in the base Minkowski space.
     // The result has zero conformal (ep, em) components.
     template<typename T, typename X, typename Y, typename Z>
-    constexpr decltype(auto) spacetime_vector(csta_metric_space const &mtr, T &&t, X &&x, Y &&y, Z &&z) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) spacetime_vector(csta_metric_space const &mtr, T &&t, X &&x, Y &&y, Z &&z) GA_NOEXCEPT {
         return vector(mtr, std::move(t), c<0>, std::move(x), std::move(y), std::move(z), c<0>);
     }
 
@@ -38,7 +38,7 @@ namespace ga {
 
         // Helper function to adapt the iterator-based spacetime_vector().
         template<typename IteratorType, std::size_t... Indices>
-        GA_ALWAYS_INLINE constexpr decltype(auto) make_spacetime_vector_using_iterator(csta_metric_space const &mtr, IteratorType begin, std::index_sequence<Indices...>) GA_NOEXCEPT {
+        GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr decltype(auto) make_spacetime_vector_using_iterator(csta_metric_space const &mtr, IteratorType begin, std::index_sequence<Indices...>) GA_NOEXCEPT {
             return spacetime_vector(mtr, *(begin + Indices)...);
         }
 
@@ -47,7 +47,7 @@ namespace ga {
     // Initializes a multivector representation of a Spacetime vector using
     // the given iterator to provide the four coordinates (t, x, y, z).
     template<typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0>
-    constexpr decltype(auto) spacetime_vector(csta_metric_space const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) spacetime_vector(csta_metric_space const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
         assert(4 == std::distance(begin, end));
         return detail::make_spacetime_vector_using_iterator(mtr, begin, std::make_index_sequence<4>{});
     }

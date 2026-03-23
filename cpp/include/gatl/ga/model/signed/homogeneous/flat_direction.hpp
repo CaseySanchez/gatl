@@ -28,7 +28,7 @@ namespace ga {
 
     // Returns the direction parameter of a given flat.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) flat_direction(clifford_expression<CoefficientType, Expression> const &flat, homogeneous_metric_space<D> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) flat_direction(clifford_expression<CoefficientType, Expression> const &flat, homogeneous_metric_space<D> const &mtr) GA_NOEXCEPT {
         constexpr auto ep = e(c<D + 1>);
         return lcont(ep, flat, mtr);
     }

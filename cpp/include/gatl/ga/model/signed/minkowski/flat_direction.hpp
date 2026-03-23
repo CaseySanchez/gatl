@@ -28,14 +28,14 @@ namespace ga {
 
     // Returns the direction parameter of a given dual flat.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) dual_flat_direction(clifford_expression<CoefficientType, Expression> const &dual_flat, minkowski_metric_space<D> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_flat_direction(clifford_expression<CoefficientType, Expression> const &dual_flat, minkowski_metric_space<D> const &mtr) GA_NOEXCEPT {
         constexpr auto ni = e(c<D + 1>) + e(c<D + 2>);
         return lcont(-ni, undual(dual_flat, mtr), mtr);
     }
 
     // Returns the direction parameter of a given primal flat.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) primal_flat_direction(clifford_expression<CoefficientType, Expression> const &primal_flat, minkowski_metric_space<D> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_flat_direction(clifford_expression<CoefficientType, Expression> const &primal_flat, minkowski_metric_space<D> const &mtr) GA_NOEXCEPT {
         constexpr auto ni = e(c<D + 1>) + e(c<D + 2>);
         return lcont(-ni, primal_flat, mtr);
     }

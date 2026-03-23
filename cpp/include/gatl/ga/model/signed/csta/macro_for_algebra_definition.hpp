@@ -44,24 +44,24 @@
 #define _GA_CSTA_ALGEBRA_DEFINITION(SPACE, BASIS_VECTORS_NAMES) \
     using space_t = csta_metric_space; \
     \
-    static space_t const SPACE; \
+    inline constexpr space_t SPACE{}; \
     static std::array<std::string, 6> const BASIS_VECTORS_NAMES = { "et", "ep", "ex", "ey", "ez", "em" }; \
     \
-    static auto const et = e(c<1>); \
-    static auto const ep = e(c<2>); \
-    static auto const ex = e(c<3>); \
-    static auto const ey = e(c<4>); \
-    static auto const ez = e(c<5>); \
-    static auto const em = e(c<6>); \
+    inline constexpr auto et = e(c<1>); \
+    inline constexpr auto ep = e(c<2>); \
+    inline constexpr auto ex = e(c<3>); \
+    inline constexpr auto ey = e(c<4>); \
+    inline constexpr auto ez = e(c<5>); \
+    inline constexpr auto em = e(c<6>); \
     \
-    static auto const no = (em - ep) / c<2>; \
-    static auto const ni = ep + em; \
+    inline constexpr auto no = (em - ep) / c<2>; \
+    inline constexpr auto ni = ep + em; \
     \
-    static auto const _0 = c<0>; \
-    static auto const _1 = c<1>; \
-    static auto const _2 = c<2>; \
+    inline constexpr auto _0 = c<0>; \
+    inline constexpr auto _1 = c<1>; \
+    inline constexpr auto _2 = c<2>; \
     \
-    static auto const I = pseudoscalar(SPACE); \
-    static auto const Ista = rcont(I, op(ep, em, SPACE), SPACE);
+    inline constexpr auto I = pseudoscalar(SPACE); \
+    inline constexpr auto Ista = rcont(I, op(ep, em, SPACE), SPACE);
 
 #endif // __GA_MODEL_SIGNED_CSTA_MACRO_FOR_ALGEBRA_DEFINITION_HPP__

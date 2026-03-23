@@ -27,7 +27,7 @@
 namespace ga {
 
     template<typename CoefficientType, typename Expression, typename ToleranceType, typename MetricSpaceType>
-    constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol, metric_space<MetricSpaceType> const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol, metric_space<MetricSpaceType> const &) {
         using lazy_context_type = decltype(make_lazy_context(arg, scalar(tol)));
 
         using blade_expression = typename lazy_context_type::template argument_expression_t<0>;
@@ -71,34 +71,34 @@ namespace ga {
     }
 
     template<typename CoefficientType, typename Expression, typename MetricSpaceType>
-    constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, metric_space<MetricSpaceType> const &mtr) {
         return exp(arg, default_tolerance<CoefficientType>(), mtr);
     }
 
     template<typename CoefficientType, typename Coefficient, typename ToleranceType, typename MetricSpaceType>
-    constexpr decltype(auto) exp(scalar_clifford_expression<CoefficientType, Coefficient> const &arg, ToleranceType const &, metric_space<MetricSpaceType> const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(scalar_clifford_expression<CoefficientType, Coefficient> const &arg, ToleranceType const &, metric_space<MetricSpaceType> const &) {
         return exp(arg);
     }
 
     template<typename CoefficientType, typename Coefficient, typename MetricSpaceType>
-    constexpr decltype(auto) exp(scalar_clifford_expression<CoefficientType, Coefficient> const &arg, metric_space<MetricSpaceType> const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(scalar_clifford_expression<CoefficientType, Coefficient> const &arg, metric_space<MetricSpaceType> const &) {
         return exp(arg);
     }
 
     template<typename Type, typename ToleranceType, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
-    constexpr decltype(auto) exp(Type const &arg, ToleranceType const &, metric_space<MetricSpaceType> const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(Type const &arg, ToleranceType const &, metric_space<MetricSpaceType> const &) {
         using std::exp;
         return exp(arg);
     }
 
     template<typename Type, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
-    constexpr decltype(auto) exp(Type const &arg, metric_space<MetricSpaceType> const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(Type const &arg, metric_space<MetricSpaceType> const &) {
         using std::exp;
         return exp(arg);
     }
 
     template<typename Type, typename ToleranceType, std::enable_if_t<!(is_clifford_expression_v<Type> || is_metric_space_v<ToleranceType>), int> = 0>
-    constexpr decltype(auto) exp(Type const &arg, ToleranceType const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) exp(Type const &arg, ToleranceType const &) {
         using std::exp;
         return exp(arg);
     }

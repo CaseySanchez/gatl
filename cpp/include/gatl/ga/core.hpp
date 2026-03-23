@@ -44,6 +44,12 @@
     #define GA_NOEXCEPT
 #endif
 
+#ifdef __CUDACC__
+    #define GA_HOST_DEVICE __host__ __device__
+#else
+    #define GA_HOST_DEVICE
+#endif
+
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -68,14 +74,18 @@
     #define GA_MAX_BASIS_VECTOR_INDEX 63
 #endif // GA_MAX_BASIS_VECTOR_INDEX
 
-#define _GA_ONE_TIME_WARNING(MESSAGE) \
-    { \
-        static bool first_time = true; \
-        if (first_time) { \
-            std::clog << "[WARNING]: " << (MESSAGE) << std::endl; \
-            first_time = false; \
-        } \
-    }
+#ifdef __CUDA_ARCH__
+    #define _GA_ONE_TIME_WARNING(MESSAGE) {}
+#else
+    #define _GA_ONE_TIME_WARNING(MESSAGE) \
+        { \
+            static bool first_time = true; \
+            if (first_time) { \
+                std::clog << "[WARNING]: " << (MESSAGE) << std::endl; \
+                first_time = false; \
+            } \
+        }
+#endif
 
 namespace ga {
 

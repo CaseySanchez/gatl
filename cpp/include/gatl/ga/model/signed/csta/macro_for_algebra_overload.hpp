@@ -25,22 +25,22 @@
 #define __GA_MODEL_SIGNED_CSTA_MACRO_FOR_ALGEBRA_OVERLOAD_HPP__
 
 #define _GA_CSTA_ALGEBRA_OVERLOAD(SPACE) \
-    template<typename T, typename X, typename Y, typename Z, std::enable_if_t<!detail::is_iterator_v<T>, int> = 0> \
+    template<typename T, typename X, typename Y, typename Z, std::enable_if_t<!ga::detail::is_iterator_v<T>, int> = 0> \
     constexpr decltype(auto) spacetime_vector(T &&t, X &&x, Y &&y, Z &&z) GA_NOEXCEPT { \
         return spacetime_vector(SPACE, std::move(t), std::move(x), std::move(y), std::move(z)); \
     } \
     \
-    template<typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0> \
+    template<typename IteratorType, std::enable_if_t<ga::detail::is_iterator_v<IteratorType>, int> = 0> \
     constexpr decltype(auto) spacetime_vector(IteratorType begin, IteratorType end) GA_NOEXCEPT { \
         return spacetime_vector(SPACE, begin, end); \
     } \
     \
-    template<typename T, typename X, typename Y, typename Z, std::enable_if_t<!detail::is_iterator_v<T>, int> = 0> \
+    template<typename T, typename X, typename Y, typename Z, std::enable_if_t<!ga::detail::is_iterator_v<T>, int> = 0> \
     constexpr decltype(auto) point(T &&t, X &&x, Y &&y, Z &&z) GA_NOEXCEPT { \
         return point(SPACE, std::move(t), std::move(x), std::move(y), std::move(z)); \
     } \
     \
-    template<typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0> \
+    template<typename IteratorType, std::enable_if_t<ga::detail::is_iterator_v<IteratorType>, int> = 0> \
     constexpr decltype(auto) point(IteratorType begin, IteratorType end) GA_NOEXCEPT { \
         return point(SPACE, begin, end); \
     } \

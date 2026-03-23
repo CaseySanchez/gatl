@@ -29,14 +29,14 @@ namespace ga {
     // Returns the direction parameter of a given dual flat in CSTA.
     // ni = ep + em = e(c<2>) + e(c<6>)
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) dual_flat_direction(clifford_expression<CoefficientType, Expression> const &dual_flat, csta_metric_space const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_flat_direction(clifford_expression<CoefficientType, Expression> const &dual_flat, csta_metric_space const &mtr) GA_NOEXCEPT {
         constexpr auto ni = e(c<2>) + e(c<6>);
         return lcont(-ni, undual(dual_flat, mtr), mtr);
     }
 
     // Returns the direction parameter of a given primal flat in CSTA.
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) primal_flat_direction(clifford_expression<CoefficientType, Expression> const &primal_flat, csta_metric_space const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_flat_direction(clifford_expression<CoefficientType, Expression> const &primal_flat, csta_metric_space const &mtr) GA_NOEXCEPT {
         constexpr auto ni = e(c<2>) + e(c<6>);
         return lcont(-ni, primal_flat, mtr);
     }

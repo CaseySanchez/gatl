@@ -30,7 +30,7 @@ namespace ga {
     using constant = scalar_clifford_expression<CoefficientType, detail::constant_value<Value> >;
 
     template<default_integral_t Value, typename CoefficientType = default_integral_t>
-    constexpr auto c = constant<CoefficientType, Value>();
+    inline constexpr auto c = constant<CoefficientType, Value>();
 
 }
 

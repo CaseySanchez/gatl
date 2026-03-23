@@ -28,7 +28,7 @@ namespace ga {
 
     // Returns the location parameter of a given dual tangent.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) dual_tangent_location(clifford_expression<CoefficientType, Expression> const &dual_tangent, minkowski_metric_space<D> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_tangent_location(clifford_expression<CoefficientType, Expression> const &dual_tangent, minkowski_metric_space<D> const &mtr) {
         auto [lazy, dual_tangent_] = make_lazy_context_tuple(dual_tangent);
         constexpr auto ni = e(c<D + 1>) + e(c<D + 2>);
         return lazy.eval(gp(dual_tangent_, inv(lcont(-ni, dual_tangent_, mtr), mtr), mtr));
@@ -36,7 +36,7 @@ namespace ga {
 
     // Returns the location parameter of a given primal tangent.
     template<typename CoefficientType, typename Expression, ndims_t D>
-    constexpr decltype(auto) primal_tangent_location(clifford_expression<CoefficientType, Expression> const &primal_tangent, minkowski_metric_space<D> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_tangent_location(clifford_expression<CoefficientType, Expression> const &primal_tangent, minkowski_metric_space<D> const &mtr) {
         auto [lazy, primal_tangent_] = make_lazy_context_tuple(primal_tangent);
         constexpr auto ni = e(c<D + 1>) + e(c<D + 2>);
         return lazy.eval(gp(primal_tangent_, inv(lcont(-ni, primal_tangent_, mtr), mtr), mtr));

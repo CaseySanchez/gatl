@@ -40,17 +40,17 @@ namespace ga {
     }
 
     template<typename ValueType, std::enable_if_t<!is_clifford_expression_v<ValueType>, int> = 0>
-    constexpr decltype(auto) scalar(ValueType &&arg) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) scalar(ValueType &&arg) GA_NOEXCEPT {
         return scaled_scalar_t<std::remove_cv_t<std::remove_reference_t<ValueType> > >(make_sequential_storage(std::move(arg)));
     }
 
     template<typename CoefficientType, typename Coefficient>
-    constexpr decltype(auto) scalar(scalar_clifford_expression<CoefficientType, Coefficient> const &arg) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) scalar(scalar_clifford_expression<CoefficientType, Coefficient> const &arg) GA_NOEXCEPT {
         return arg;
     }
 
     template<typename CoefficientType, typename Coefficient>
-    constexpr decltype(auto) scalar(scalar_clifford_expression<CoefficientType, Coefficient> &&arg) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) scalar(scalar_clifford_expression<CoefficientType, Coefficient> &&arg) GA_NOEXCEPT {
         return std::move(arg);
     }
 

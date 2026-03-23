@@ -28,25 +28,25 @@ namespace ga {
 
     // Returns whether the given Clifford expression is equal to zero up to an assumed numerical error.
     template<typename CoefficientType, typename Expression, typename ToleranceType>
-    constexpr bool is_zero(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) {
+    GA_HOST_DEVICE constexpr bool is_zero(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) {
         using std::abs;
         return for_each_component(arg, [&](bitset_t const, CoefficientType const &value, entry_source_t const, entry_source_t const, bool &keep_going) { keep_going = abs(value) <= (CoefficientType)tol; });
     }
 
     template<typename CoefficientType, typename Expression>
-    constexpr bool is_zero(clifford_expression<CoefficientType, Expression> const &arg) {
+    GA_HOST_DEVICE constexpr bool is_zero(clifford_expression<CoefficientType, Expression> const &arg) {
         return is_zero(arg, default_tolerance<CoefficientType>());
     }
 
     // Returns whether the given Clifford expression is a null multivector up to an assumed numerical error.
     template<typename CoefficientType, typename Expression, typename ToleranceType, typename MetricSpaceType>
-    constexpr bool is_null(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr bool is_null(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
         return is_zero(rnorm_sqr(arg, mtr), tol);
     }
 
     // Returns whether the given Clifford expression is a unit multivector up to an assumed numerical error.
     template<typename CoefficientType, typename Expression, typename ToleranceType, typename MetricSpaceType>
-    constexpr bool is_unit(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr bool is_unit(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
         return is_zero(abs(rnorm_sqr(arg, mtr)) - c<1>, tol);
     }
 

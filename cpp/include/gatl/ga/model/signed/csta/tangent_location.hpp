@@ -29,7 +29,7 @@ namespace ga {
     // Returns the location parameter of a given dual tangent in CSTA.
     // ni = ep + em = e(c<2>) + e(c<6>)
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) dual_tangent_location(clifford_expression<CoefficientType, Expression> const &dual_tangent, csta_metric_space const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_tangent_location(clifford_expression<CoefficientType, Expression> const &dual_tangent, csta_metric_space const &mtr) {
         auto [lazy, dual_tangent_] = make_lazy_context_tuple(dual_tangent);
         constexpr auto ni = e(c<2>) + e(c<6>);
         return lazy.eval(gp(dual_tangent_, inv(lcont(-ni, dual_tangent_, mtr), mtr), mtr));
@@ -37,7 +37,7 @@ namespace ga {
 
     // Returns the location parameter of a given primal tangent in CSTA.
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) primal_tangent_location(clifford_expression<CoefficientType, Expression> const &primal_tangent, csta_metric_space const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_tangent_location(clifford_expression<CoefficientType, Expression> const &primal_tangent, csta_metric_space const &mtr) {
         auto [lazy, primal_tangent_] = make_lazy_context_tuple(primal_tangent);
         constexpr auto ni = e(c<2>) + e(c<6>);
         return lazy.eval(gp(primal_tangent_, inv(lcont(-ni, primal_tangent_, mtr), mtr), mtr));

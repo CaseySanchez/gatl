@@ -29,7 +29,7 @@ namespace ga {
     // Returns the squared size parameter of a given dual round in CSTA.
     // ni = ep + em = e(c<2>) + e(c<6>)
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) dual_round_size_sqr(clifford_expression<CoefficientType, Expression> const &dual_round, csta_metric_space const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_round_size_sqr(clifford_expression<CoefficientType, Expression> const &dual_round, csta_metric_space const &mtr) {
         auto [lazy, dual_round_] = make_lazy_context_tuple(dual_round);
         constexpr auto ni = e(c<2>) + e(c<6>);
         auto aux_ = lcont(ni, dual_round_, mtr);
@@ -38,7 +38,7 @@ namespace ga {
 
     // Returns the squared size parameter of a given primal round in CSTA.
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) primal_round_size_sqr(clifford_expression<CoefficientType, Expression> const &primal_round, csta_metric_space const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_round_size_sqr(clifford_expression<CoefficientType, Expression> const &primal_round, csta_metric_space const &mtr) {
         auto [lazy, primal_round_] = make_lazy_context_tuple(primal_round);
         constexpr auto ni = e(c<2>) + e(c<6>);
         auto aux_ = lcont(ni, primal_round_, mtr);

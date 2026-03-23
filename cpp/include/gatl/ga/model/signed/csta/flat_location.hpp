@@ -29,7 +29,7 @@ namespace ga {
     // Returns the location parameter of a given dual flat in CSTA.
     // no = (em - ep) / 2 = (e(c<6>) - e(c<2>)) / 2
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) dual_flat_location(clifford_expression<CoefficientType, Expression> const &dual_flat, csta_metric_space const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual_flat_location(clifford_expression<CoefficientType, Expression> const &dual_flat, csta_metric_space const &mtr) {
         auto [lazy, dual_flat_] = make_lazy_context_tuple(dual_flat);
         constexpr auto no = (e(c<6>) - e(c<2>)) / c<2>;
         return lazy.eval(gp(op(no, dual_flat_, mtr), inv(dual_flat_, mtr), mtr));
@@ -37,7 +37,7 @@ namespace ga {
 
     // Returns the location parameter of a given primal flat in CSTA.
     template<typename CoefficientType, typename Expression>
-    constexpr decltype(auto) primal_flat_location(clifford_expression<CoefficientType, Expression> const &primal_flat, csta_metric_space const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) primal_flat_location(clifford_expression<CoefficientType, Expression> const &primal_flat, csta_metric_space const &mtr) {
         auto [lazy, primal_flat_] = make_lazy_context_tuple(primal_flat);
         constexpr auto no = (e(c<6>) - e(c<2>)) / c<2>;
         return lazy.eval(gp(lcont(no, primal_flat_, mtr), inv(primal_flat_, mtr), mtr));

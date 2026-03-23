@@ -189,27 +189,27 @@ namespace ga {
             constexpr sequential_storage & operator=(sequential_storage const &) = default;
             constexpr sequential_storage & operator=(sequential_storage &&) = default;
 
-            constexpr decltype(auto) begin() GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr decltype(auto) begin() GA_NOEXCEPT {
                 return entries_.begin();
             }
 
-            constexpr decltype(auto) begin() const GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr decltype(auto) begin() const GA_NOEXCEPT {
                 return entries_.begin();
             }
 
-            constexpr decltype(auto) end() GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr decltype(auto) end() GA_NOEXCEPT {
                 return entries_.end();
             }
 
-            constexpr decltype(auto) end() const GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr decltype(auto) end() const GA_NOEXCEPT {
                 return entries_.end();
             }
 
-            constexpr decltype(auto) cbegin() const GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr decltype(auto) cbegin() const GA_NOEXCEPT {
                 return entries_.cbegin();
             }
 
-            constexpr decltype(auto) cend() const GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr decltype(auto) cend() const GA_NOEXCEPT {
                 return entries_.cend();
             }
 
@@ -652,7 +652,7 @@ namespace ga {
         template<typename Coefficient>
         struct _clifford_expression_to_native<component<Coefficient, constant_basis_blade<bitset_t(0)> >, true> {
             template<typename ValueCItr>
-            GA_ALWAYS_INLINE constexpr static decltype(auto) eval(ValueCItr const &) GA_NOEXCEPT {
+            GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static decltype(auto) eval(ValueCItr const &) GA_NOEXCEPT {
                 return Coefficient::template eval<0, 0>(std::tuple<>());
             }
         };
@@ -660,7 +660,7 @@ namespace ga {
         template<>
         struct _clifford_expression_to_native<component<stored_value, constant_basis_blade<bitset_t(0)> >, false> {
             template<typename ValueCItr>
-            GA_ALWAYS_INLINE constexpr static decltype(auto) eval(ValueCItr const &value_itr) {
+            GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static decltype(auto) eval(ValueCItr const &value_itr) {
                 return *value_itr;
             }
         };
@@ -692,18 +692,18 @@ namespace ga {
         using super::bitsets;
         using super::maps;
 
-        constexpr clifford_expression() = default;
-        constexpr clifford_expression(clifford_expression const &) = default;
-        constexpr clifford_expression(clifford_expression &&) = default;
+        GA_HOST_DEVICE constexpr clifford_expression() = default;
+        GA_HOST_DEVICE constexpr clifford_expression(clifford_expression const &) = default;
+        GA_HOST_DEVICE constexpr clifford_expression(clifford_expression &&) = default;
 
         template<typename OtherCoefficientType, typename OtherExpression>
-        clifford_expression(clifford_expression<OtherCoefficientType, OtherExpression> const &other) GA_NOEXCEPT;
+        GA_HOST_DEVICE clifford_expression(clifford_expression<OtherCoefficientType, OtherExpression> const &other) GA_NOEXCEPT;
 
         template<typename OtherCoefficientType, typename OtherExpression>
-        clifford_expression(clifford_expression<OtherCoefficientType, OtherExpression> &&other) GA_NOEXCEPT;
+        GA_HOST_DEVICE clifford_expression(clifford_expression<OtherCoefficientType, OtherExpression> &&other) GA_NOEXCEPT;
 
         template<typename... StorageTypes>
-        constexpr clifford_expression(StorageTypes &&... args) GA_NOEXCEPT :
+        GA_HOST_DEVICE constexpr clifford_expression(StorageTypes &&... args) GA_NOEXCEPT :
             super(std::move(args)...) {
         }
 
@@ -718,7 +718,7 @@ namespace ga {
 
     // Helper function to build a sequential storage of values, bitsets or maps.
     template<typename... Args>
-    constexpr decltype(auto) make_sequential_storage(Args &&... args) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) make_sequential_storage(Args &&... args) GA_NOEXCEPT {
         return detail::sequential_storage<std::common_type_t<std::remove_cv_t<std::remove_reference_t<Args> >...>, sizeof...(args)>(std::move(args)...);
     }
 

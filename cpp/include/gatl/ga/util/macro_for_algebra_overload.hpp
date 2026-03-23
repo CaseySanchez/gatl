@@ -25,18 +25,18 @@
 #define __GA_UTIL_MACRO_FOR_ALGEBRA_OVERLOAD_HPP__
 
 #define _GA_UTIL_OVERLOAD(SPACE) \
-    constexpr decltype(auto) pseudoscalar() GA_NOEXCEPT { \
-        return pseudoscalar(SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) pseudoscalar() GA_NOEXCEPT { \
+        return pseudoscalar(decltype(SPACE){}); \
     } \
     \
-    template<typename... Types, std::enable_if_t<std::disjunction_v<std::bool_constant<!detail::is_iterator_v<Types> >...>, int> = 0> \
-    constexpr decltype(auto) vector(Types &&... coords) GA_NOEXCEPT { \
-        return ga::vector(SPACE, std::move(coords)...); \
+    template<typename... Types, std::enable_if_t<std::disjunction_v<std::bool_constant<!ga::detail::is_iterator_v<Types> >...>, int> = 0> \
+    GA_HOST_DEVICE constexpr decltype(auto) vector(Types &&... coords) GA_NOEXCEPT { \
+        return ga::vector(decltype(SPACE){}, std::move(coords)...); \
     } \
     \
-    template<typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0> \
-    constexpr decltype(auto) vector(IteratorType begin, IteratorType end) GA_NOEXCEPT { \
-        return ga::vector(SPACE, begin, end); \
+    template<typename IteratorType, std::enable_if_t<ga::detail::is_iterator_v<IteratorType>, int> = 0> \
+    GA_HOST_DEVICE constexpr decltype(auto) vector(IteratorType begin, IteratorType end) GA_NOEXCEPT { \
+        return ga::vector(decltype(SPACE){}, begin, end); \
     }
 
 #endif // __GA_UTIL_MACRO_FOR_ALGEBRA_OVERLOAD_HPP__

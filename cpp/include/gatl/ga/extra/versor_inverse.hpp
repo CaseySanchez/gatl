@@ -27,23 +27,23 @@
 namespace ga {
 
     template<typename CoefficientType, typename Expression, typename MetricSpaceType>
-    constexpr decltype(auto) inv(clifford_expression<CoefficientType, Expression> const &arg, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) inv(clifford_expression<CoefficientType, Expression> const &arg, metric_space<MetricSpaceType> const &mtr) {
         auto [lazy, arg_] = make_lazy_context_tuple(arg);
         return lazy.eval(gp(reverse(arg_), inv(rnorm_sqr(arg_, mtr))));
     }
 
     template<typename CoefficientType, typename Coefficient>
-    constexpr decltype(auto) inv(scalar_clifford_expression<CoefficientType, Coefficient> const &arg) {
-        return pow(arg, c<-1>);
+    GA_HOST_DEVICE constexpr decltype(auto) inv(scalar_clifford_expression<CoefficientType, Coefficient> const &arg) {
+        return pow(arg, constant<default_integral_t, -1>{});
     }
 
     template<typename Type, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
-    constexpr decltype(auto) inv(Type const &arg, metric_space<MetricSpaceType> const &) {
+    GA_HOST_DEVICE constexpr decltype(auto) inv(Type const &arg, metric_space<MetricSpaceType> const &) {
         return pow(scalar(arg), c<-1>);
     }
 
     template<typename Type, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
-    constexpr decltype(auto) inv(Type const &arg) {
+    GA_HOST_DEVICE constexpr decltype(auto) inv(Type const &arg) {
         return pow(scalar(arg), c<-1>);
     }
 

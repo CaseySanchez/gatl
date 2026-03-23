@@ -26,153 +26,153 @@
 
 #define _GA_EXTRA_OVERLOAD(SPACE, BASIS_VECTORS_NAMES) \
     template<typename VersorType, typename Type> \
-    constexpr decltype(auto) apply_even_versor(VersorType const &versor, Type const &arg) { \
-        return apply_even_versor(versor, arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) apply_even_versor(VersorType const &versor, Type const &arg) { \
+        return apply_even_versor(versor, arg, decltype(SPACE){}); \
     } \
     \
     template<typename VersorType, typename Type> \
-    constexpr decltype(auto) apply_odd_versor(VersorType const &versor, Type const &arg) { \
-        return apply_odd_versor(versor, arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) apply_odd_versor(VersorType const &versor, Type const &arg) { \
+        return apply_odd_versor(versor, arg, decltype(SPACE){}); \
     } \
     \
     template<typename RotorType, typename Type> \
-    constexpr decltype(auto) apply_rotor(RotorType const &rotor, Type const &arg) { \
-        return apply_rotor(rotor, arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) apply_rotor(RotorType const &rotor, Type const &arg) { \
+        return apply_rotor(rotor, arg, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) cp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return cp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) cp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return cp(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType, std::enable_if_t<!is_metric_space_v<ToleranceType>, int> = 0> \
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) GA_NOEXCEPT { \
-        return dp(lhs, rhs, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) GA_NOEXCEPT { \
+        return dp(lhs, rhs, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
-        return dp(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) dp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT { \
+        return dp(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), decltype(SPACE){}); \
     } \
     \
     template<typename Type, typename PseudoscalarCoefficientType, typename PseudoscalarExpression> \
-    constexpr decltype(auto) dual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar) { \
-        return dual(arg, pseudoscalar, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) dual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar) { \
+        return dual(arg, pseudoscalar, decltype(SPACE){}); \
     } \
     \
     template<typename Type> \
-    constexpr decltype(auto) dual(Type const &arg) { \
-        return dual(arg, pseudoscalar(SPACE), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) dual(Type const &arg) { \
+        return dual(arg, pseudoscalar(decltype(SPACE){}), decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression, typename ToleranceType, std::enable_if_t<!is_metric_space_v<ToleranceType>, int> = 0> \
-    constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) { \
-        return exp(arg, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) { \
+        return exp(arg, tol, decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression> \
-    constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg) { \
-        return exp(arg, default_tolerance<CoefficientType>(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) exp(clifford_expression<CoefficientType, Expression> const &arg) { \
+        return exp(arg, default_tolerance<CoefficientType>(), decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType> \
-    constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
-        return fast_join(lhs, rhs, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
+        return fast_join(lhs, rhs, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return fast_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) fast_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return fast_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType> \
-    constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
-        return fast_meet_and_join(lhs, rhs, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
+        return fast_meet_and_join(lhs, rhs, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return fast_meet_and_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) fast_meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return fast_meet_and_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType> \
-    constexpr decltype(auto) fast_plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
-        return fast_plunge(lhs, rhs, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) fast_plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
+        return fast_plunge(lhs, rhs, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) fast_plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return fast_plunge(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) fast_plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return fast_plunge(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) igp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return igp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) igp(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return igp(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename LeftType, typename RightCoefficientType, typename RightExpression, std::enable_if_t<!is_clifford_expression_v<LeftType>, int> = 0> \
-    constexpr decltype(auto) igp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return igp(lhs, rhs, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) igp(LeftType const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return igp(lhs, rhs, decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression> \
-    constexpr decltype(auto) inv(clifford_expression<CoefficientType, Expression> const &arg) { \
-        return inv(arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) inv(clifford_expression<CoefficientType, Expression> const &arg) { \
+        return inv(arg, decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression, typename ToleranceType> \
     constexpr bool is_null(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) GA_NOEXCEPT{ \
-        return is_null(arg, tol, SPACE); \
+        return is_null(arg, tol, decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression, typename ToleranceType> \
     constexpr bool is_unit(clifford_expression<CoefficientType, Expression> const &arg, ToleranceType const &tol) GA_NOEXCEPT { \
-        return is_unit(arg, tol, SPACE); \
+        return is_unit(arg, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType> \
-    constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
-        return meet_and_join(lhs, rhs, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
+        return meet_and_join(lhs, rhs, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return meet_and_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return meet_and_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType> \
-    constexpr decltype(auto) plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
-        return plunge(lhs, rhs, tol, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol) { \
+        return plunge(lhs, rhs, tol, decltype(SPACE){}); \
     } \
     \
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression> \
-    constexpr decltype(auto) plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
-        return plunge(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) plunge(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs) { \
+        return plunge(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression> \
-    constexpr decltype(auto) rnorm(clifford_expression<CoefficientType, Expression> const &arg) { \
-        return rnorm(arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rnorm(clifford_expression<CoefficientType, Expression> const &arg) { \
+        return rnorm(arg, decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression> \
-    constexpr decltype(auto) rnorm_sqr(clifford_expression<CoefficientType, Expression> const &arg) GA_NOEXCEPT { \
-        return rnorm_sqr(arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) rnorm_sqr(clifford_expression<CoefficientType, Expression> const &arg) GA_NOEXCEPT { \
+        return rnorm_sqr(arg, decltype(SPACE){}); \
     } \
     \
     template<typename Type, typename PseudoscalarCoefficientType, typename PseudoscalarExpression> \
-    constexpr decltype(auto) undual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar) GA_NOEXCEPT { \
-        return undual(arg, pseudoscalar, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) undual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar) GA_NOEXCEPT { \
+        return undual(arg, pseudoscalar, decltype(SPACE){}); \
     } \
     \
     template<typename Type> \
-    constexpr decltype(auto) undual(Type const &arg) GA_NOEXCEPT { \
-        return undual(arg, pseudoscalar(SPACE), SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) undual(Type const &arg) GA_NOEXCEPT { \
+        return undual(arg, pseudoscalar(decltype(SPACE){}), decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression> \
-    constexpr decltype(auto) unit(clifford_expression<CoefficientType, Expression> const &arg) { \
-        return unit(arg, SPACE); \
+    GA_HOST_DEVICE constexpr decltype(auto) unit(clifford_expression<CoefficientType, Expression> const &arg) { \
+        return unit(arg, decltype(SPACE){}); \
     } \
     \
     template<typename CoefficientType, typename Expression> \

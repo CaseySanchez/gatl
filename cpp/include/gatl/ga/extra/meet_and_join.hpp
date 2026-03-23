@@ -30,7 +30,7 @@ namespace ga {
 
         // Returns a std::tuple<T1, T2> structure where T1 is the meet and T2 is the join of the given pair of blades. This implementation assumes that the grade of the left-hand side argument is lower or equal to the grade of the right-hand side argument.
         template<ndims_t N, typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType>
-        GA_ALWAYS_INLINE constexpr decltype(auto) _meet_and_join_impl(bool const extra_sign_change, clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, grade_t const grade_lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, grade_t const grade_rhs, ToleranceType const &tol) {
+        GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr decltype(auto) _meet_and_join_impl(bool const extra_sign_change, clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, grade_t const grade_lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, grade_t const grade_rhs, ToleranceType const &tol) {
             using std::abs;
             using delta_type = decltype(dp(lhs, rhs, real_metric_space()));
             using value_type = std::common_type_t<LeftCoefficientType, RightCoefficientType>;
@@ -125,7 +125,7 @@ namespace ga {
 
     // Returns a std::tuple<T1, T2> structure where T1 is the meet and T2 is the join of the given pair of blades. This function does not allow lazy evaluation with arguments from a lazy context.
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename ToleranceType, typename MetricSpaceType>
-    constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, ToleranceType const &tol, metric_space<MetricSpaceType> const &mtr) {
         auto const tol_ = scalar(tol);
         grade_t const grade_lhs = grade(lhs, tol_);
         grade_t const grade_rhs = grade(rhs, tol_);
@@ -133,7 +133,7 @@ namespace ga {
     }
 
     template<typename LeftCoefficientType, typename LeftExpression, typename RightCoefficientType, typename RightExpression, typename MetricSpaceType>
-    constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) meet_and_join(clifford_expression<LeftCoefficientType, LeftExpression> const &lhs, clifford_expression<RightCoefficientType, RightExpression> const &rhs, metric_space<MetricSpaceType> const &mtr) {
         return meet_and_join(lhs, rhs, default_tolerance<std::common_type_t<LeftCoefficientType, RightCoefficientType> >(), mtr);
     }
 

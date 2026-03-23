@@ -27,24 +27,24 @@
 namespace ga {
 
     template<typename CoefficientType, typename Expression, typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType>
-    constexpr decltype(auto) dual(clifford_expression<CoefficientType, Expression> const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual(clifford_expression<CoefficientType, Expression> const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) {
         auto [lazy, arg_, pseudoscalar_] = make_lazy_context_tuple(arg, pseudoscalar);
         return lazy.eval(lcont(arg_, inv(pseudoscalar_, mtr), mtr));
     }
 
     template<typename Type, typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
-    constexpr decltype(auto) dual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) {
+    GA_HOST_DEVICE constexpr decltype(auto) dual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) {
         return dual(scalar(arg), pseudoscalar, mtr);
     }
 
     template<typename CoefficientType, typename Expression, typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType>
-    constexpr decltype(auto) undual(clifford_expression<CoefficientType, Expression> const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) undual(clifford_expression<CoefficientType, Expression> const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
         auto [lazy, arg_, pseudoscalar_] = make_lazy_context_tuple(arg, pseudoscalar);
         return lazy.eval(lcont(arg_, pseudoscalar_, mtr));
     }
 
     template<typename Type, typename PseudoscalarCoefficientType, typename PseudoscalarExpression, typename MetricSpaceType, std::enable_if_t<!is_clifford_expression_v<Type>, int> = 0>
-    constexpr decltype(auto) undual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr decltype(auto) undual(Type const &arg, clifford_expression<PseudoscalarCoefficientType, PseudoscalarExpression> const &pseudoscalar, metric_space<MetricSpaceType> const &mtr) GA_NOEXCEPT {
         return undual(scalar(arg), pseudoscalar, mtr);
     }
 
