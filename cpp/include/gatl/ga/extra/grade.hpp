@@ -39,19 +39,19 @@ namespace ga {
 
         using value_type = scalar_clifford_expression<grade_t, Value>;
 
-        constexpr grade_result(grade_result const &) = default;
-        constexpr grade_result(grade_result &&) = default;
+        GA_HOST_DEVICE constexpr grade_result(grade_result const &) = default;
+        GA_HOST_DEVICE constexpr grade_result(grade_result &&) = default;
 
-        constexpr grade_result(value_type const &) GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr grade_result(value_type const &) GA_NOEXCEPT {
         }
 
-        constexpr operator value_type() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr operator value_type() const GA_NOEXCEPT {
             return value_type();
         }
 
-        constexpr operator grade_t() const = delete;
+        GA_HOST_DEVICE constexpr operator grade_t() const = delete;
 
-        constexpr grade_interpretation_t flag() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr grade_interpretation_t flag() const GA_NOEXCEPT {
             return LAZY_GRADE;
         }
     };
@@ -62,28 +62,28 @@ namespace ga {
 
         using value_type = scalar_clifford_expression<grade_t, detail::stored_value>;
 
-        constexpr grade_result(grade_result const &) = default;
-        constexpr grade_result(grade_result &&) = default;
+        GA_HOST_DEVICE constexpr grade_result(grade_result const &) = default;
+        GA_HOST_DEVICE constexpr grade_result(grade_result &&) = default;
 
-        constexpr grade_result(value_type const &value) GA_NOEXCEPT :
+        GA_HOST_DEVICE constexpr grade_result(value_type const &value) GA_NOEXCEPT :
             value_(value) {
         }
 
-        constexpr operator value_type() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr operator value_type() const GA_NOEXCEPT {
             return value_;
         }
 
-        constexpr operator grade_t() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr operator grade_t() const GA_NOEXCEPT {
             return value_;
         }
 
-        constexpr grade_interpretation_t flag() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr grade_interpretation_t flag() const GA_NOEXCEPT {
             return flag(*this);
         }
 
     private:
 
-        constexpr grade_interpretation_t flag(grade_t const grade) const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr grade_interpretation_t flag(grade_t const grade) const GA_NOEXCEPT {
             return grade >= 0 ? SINGLE_GRADE : (grade_interpretation_t)grade;
         }
 
@@ -96,21 +96,21 @@ namespace ga {
 
         using value_type = scalar_clifford_expression<grade_t, detail::constant_value<GradeValue> >;
 
-        constexpr grade_result(grade_result const &) = default;
-        constexpr grade_result(grade_result &&) = default;
+        GA_HOST_DEVICE constexpr grade_result(grade_result const &) = default;
+        GA_HOST_DEVICE constexpr grade_result(grade_result &&) = default;
 
-        constexpr grade_result(value_type const &) GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr grade_result(value_type const &) GA_NOEXCEPT {
         }
 
-        constexpr operator value_type() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr operator value_type() const GA_NOEXCEPT {
             return value_type();
         }
 
-        constexpr operator grade_t() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr operator grade_t() const GA_NOEXCEPT {
             return static_cast<grade_t>(GradeValue);
         }
 
-        constexpr grade_interpretation_t flag() const GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr grade_interpretation_t flag() const GA_NOEXCEPT {
             return GradeValue >= 0 ? SINGLE_GRADE : (grade_interpretation_t)GradeValue;
         }
     };

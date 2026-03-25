@@ -35,7 +35,7 @@ namespace ga {
 
     // Converts the given native value type to scalar Clifford expression.
     template<typename ValueType, std::enable_if_t<!is_clifford_expression_v<ValueType>, int> = 0>
-    constexpr scaled_scalar_t<ValueType> scalar(ValueType const &arg) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr scaled_scalar_t<ValueType> scalar(ValueType const &arg) GA_NOEXCEPT {
         return scaled_scalar_t<ValueType>(make_sequential_storage(arg));
     }
 

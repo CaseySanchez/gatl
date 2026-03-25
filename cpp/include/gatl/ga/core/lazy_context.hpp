@@ -500,21 +500,21 @@ namespace ga {
 
             using input_type = clifford_expression<InputCoefficientType, InputExpression>;
 
-            constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
-            constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
 
-            constexpr _super_lazy_context_input(input_type const &input) GA_NOEXCEPT :
+            GA_HOST_DEVICE constexpr _super_lazy_context_input(input_type const &input) GA_NOEXCEPT :
                 input_(input) {
             }
 
-            constexpr _super_lazy_context_input & operator=(_super_lazy_context_input const &) = delete;
-            constexpr _super_lazy_context_input & operator=(_super_lazy_context_input &&) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input & operator=(_super_lazy_context_input const &) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input & operator=(_super_lazy_context_input &&) = delete;
 
             GA_HOST_DEVICE constexpr decltype(auto) get_as_tuple() const GA_NOEXCEPT {
                 return std::tie(input_);
             }
 
-            constexpr static bool is_stored() GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr static bool is_stored() GA_NOEXCEPT {
                 return true;
             }
 
@@ -529,20 +529,20 @@ namespace ga {
 
             using input_type = clifford_expression<InputCoefficientType, InputExpression>;
 
-            constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
-            constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
 
-            constexpr _super_lazy_context_input(clifford_expression<InputCoefficientType, InputExpression> const &) GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr _super_lazy_context_input(clifford_expression<InputCoefficientType, InputExpression> const &) GA_NOEXCEPT {
             }
 
-            constexpr _super_lazy_context_input & operator=(_super_lazy_context_input const &) = delete;
-            constexpr _super_lazy_context_input & operator=(_super_lazy_context_input &&) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input & operator=(_super_lazy_context_input const &) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context_input & operator=(_super_lazy_context_input &&) = delete;
 
             GA_HOST_DEVICE constexpr decltype(auto) get_as_tuple() const GA_NOEXCEPT {
                 return std::make_tuple();
             }
 
-            constexpr static bool is_stored() GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr static bool is_stored() GA_NOEXCEPT {
                 return false;
             }
         };
@@ -572,22 +572,22 @@ namespace ga {
                 >;
             };
 
-            constexpr _super_lazy_context(_super_lazy_context const &) = default;
-            constexpr _super_lazy_context(_super_lazy_context &&) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context const &) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context &&) = default;
 
-            constexpr _super_lazy_context(clifford_expression<InputCoefficientType, InputExpression> const &input, clifford_expression<OtherInputCoefficientTypes, OtherInputExpressions> const &... other_inputs) GA_NOEXCEPT :
+            GA_HOST_DEVICE constexpr _super_lazy_context(clifford_expression<InputCoefficientType, InputExpression> const &input, clifford_expression<OtherInputCoefficientTypes, OtherInputExpressions> const &... other_inputs) GA_NOEXCEPT :
                 super_input(input),
                 super_recursive(other_inputs...) {
             }
 
-            constexpr _super_lazy_context & operator=(_super_lazy_context const &) = delete;
-            constexpr _super_lazy_context & operator=(_super_lazy_context &&) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context & operator=(_super_lazy_context const &) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context & operator=(_super_lazy_context &&) = delete;
 
             GA_HOST_DEVICE constexpr decltype(auto) stored_inputs_tuple() const GA_NOEXCEPT {
                 return std::tuple_cat(super_input::get_as_tuple(), super_recursive::stored_inputs_tuple());
             }
 
-            constexpr static std::size_t stored_inputs_count() GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr static std::size_t stored_inputs_count() GA_NOEXCEPT {
                 return (super_input::is_stored() ? 1 : 0) + super_recursive::stored_inputs_count();
             }
         };
@@ -596,18 +596,18 @@ namespace ga {
         class _super_lazy_context<BaseTag> {
         public:
 
-            constexpr _super_lazy_context() = default;
-            constexpr _super_lazy_context(_super_lazy_context const &) = default;
-            constexpr _super_lazy_context(_super_lazy_context &&) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context() = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context const &) = default;
+            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context &&) = default;
 
-            constexpr _super_lazy_context & operator=(_super_lazy_context const &) = delete;
-            constexpr _super_lazy_context & operator=(_super_lazy_context &&) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context & operator=(_super_lazy_context const &) = delete;
+            GA_HOST_DEVICE constexpr _super_lazy_context & operator=(_super_lazy_context &&) = delete;
 
             GA_HOST_DEVICE constexpr decltype(auto) stored_inputs_tuple() const GA_NOEXCEPT {
                 return std::make_tuple();
             }
 
-            constexpr static std::size_t stored_inputs_count() GA_NOEXCEPT {
+            GA_HOST_DEVICE constexpr static std::size_t stored_inputs_count() GA_NOEXCEPT {
                 return 0;
             }
         };
@@ -638,22 +638,22 @@ namespace ga {
         template<std::size_t Index>
         using argument_expression_t = typename argument_t<Index>::expression_type;
 
-        constexpr lazy_context(lazy_context const &) = default;
-        constexpr lazy_context(lazy_context &&) = default;
+        GA_HOST_DEVICE constexpr lazy_context(lazy_context const &) = default;
+        GA_HOST_DEVICE constexpr lazy_context(lazy_context &&) = default;
 
-        constexpr lazy_context(clifford_expression<InputCoefficientTypes, InputExpressions> const &... inputs) GA_NOEXCEPT :
+        GA_HOST_DEVICE constexpr lazy_context(clifford_expression<InputCoefficientTypes, InputExpressions> const &... inputs) GA_NOEXCEPT :
             super(inputs...) {
         }
 
-        constexpr lazy_context & operator=(lazy_context const &) = delete;
-        constexpr lazy_context & operator=(lazy_context &&) = delete;
+        GA_HOST_DEVICE constexpr lazy_context & operator=(lazy_context const &) = delete;
+        GA_HOST_DEVICE constexpr lazy_context & operator=(lazy_context &&) = delete;
 
         template<std::size_t Index>
-        constexpr static decltype(auto) argument() GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr static decltype(auto) argument() GA_NOEXCEPT {
             return argument_t<Index>();
         }
 
-        constexpr static decltype(auto) arguments() GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr static decltype(auto) arguments() GA_NOEXCEPT {
             return arguments_tuple(std::make_index_sequence<sizeof...(InputExpressions)>());
         }
 
@@ -665,7 +665,7 @@ namespace ga {
     private:
 
         template<std::size_t... Indices>
-        constexpr static decltype(auto) arguments_tuple(std::index_sequence<Indices...>) GA_NOEXCEPT {
+        GA_HOST_DEVICE constexpr static decltype(auto) arguments_tuple(std::index_sequence<Indices...>) GA_NOEXCEPT {
             return std::make_tuple(argument<Indices>()...);
         }
     };

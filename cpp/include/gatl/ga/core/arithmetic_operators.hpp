@@ -27,7 +27,7 @@
 namespace ga {
 
     template<typename RightCoefficientType, typename RightExpression>
-    constexpr clifford_expression<RightCoefficientType, RightExpression> operator+(clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT {
+    GA_HOST_DEVICE constexpr clifford_expression<RightCoefficientType, RightExpression> operator+(clifford_expression<RightCoefficientType, RightExpression> const &rhs) GA_NOEXCEPT {
         return rhs;
     }
 
