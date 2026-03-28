@@ -55,7 +55,7 @@ namespace ga {
     // using the given iterator to provide the four coordinates (t, x, y, z).
     template<typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0>
     GA_HOST_DEVICE constexpr decltype(auto) point(csta_metric_space const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
-        assert(4 == std::distance(begin, end));
+        assert(4 == GA_STD_NAMESPACE::distance(begin, end));
         return detail::make_csta_point_using_iterator(mtr, begin, std::make_index_sequence<4>{});
     }
 

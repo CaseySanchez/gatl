@@ -59,7 +59,7 @@ namespace ga {
             template<typename ValueCItr, typename BitsetCItr, typename MapCIts, typename Function>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static bool run(ValueCItr const &, BitsetCItr const &, MapCIts const &, Function f) GA_NOEXCEPT(GA_NOEXCEPT(f)) {
                 bool keep_going = true;
-                f(BasisVectors, static_cast<ValueType>(Coefficient::template eval<0, 0>(std::make_tuple())), entry_source_t::COMPILE_TIME_DEFINED_ENTRY, entry_source_t::COMPILE_TIME_DEFINED_ENTRY, keep_going);
+                f(BasisVectors, static_cast<ValueType>(Coefficient::template eval<0, 0>(GA_STD_NAMESPACE::make_tuple())), entry_source_t::COMPILE_TIME_DEFINED_ENTRY, entry_source_t::COMPILE_TIME_DEFINED_ENTRY, keep_going);
                 return keep_going;
             }
         };
@@ -82,7 +82,7 @@ namespace ga {
             template<typename ValueCItr, typename BitsetCItr, typename MapCIts, typename Function>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static bool run(ValueCItr const &, BitsetCItr &bitset_citr, MapCIts const &, Function f) GA_NOEXCEPT(GA_NOEXCEPT(f)) {
                 bool keep_going = true;
-                f(*bitset_citr, static_cast<ValueType>(Coefficient::template eval<0, 0>(std::make_tuple())), entry_source_t::STORED_RUNTIME_DEFINED_ENTRY, entry_source_t::COMPILE_TIME_DEFINED_ENTRY, keep_going);
+                f(*bitset_citr, static_cast<ValueType>(Coefficient::template eval<0, 0>(GA_STD_NAMESPACE::make_tuple())), entry_source_t::STORED_RUNTIME_DEFINED_ENTRY, entry_source_t::COMPILE_TIME_DEFINED_ENTRY, keep_going);
                 ++bitset_citr;
                 return keep_going;
             }

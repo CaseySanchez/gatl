@@ -35,7 +35,7 @@ namespace ga {
     // Initializes a multivector representation of a point using the given coordinates expressed in the base space.
     template<ndims_t D, typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0>
     GA_HOST_DEVICE constexpr decltype(auto) point(homogeneous_metric_space<D> const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
-        assert(D == std::distance(begin, end));
+        assert(D == GA_STD_NAMESPACE::distance(begin, end));
         return detail::make_vector_using_iterator(mtr, begin, std::make_index_sequence<D>{}, c<1>);
     }
 

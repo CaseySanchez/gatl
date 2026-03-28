@@ -46,8 +46,16 @@
 
 #ifdef __CUDACC__
     #define GA_HOST_DEVICE __host__ __device__
+    #include <cuda/std/array>
+    #include <cuda/std/iterator>
+    #include <cuda/std/tuple>
+    #define GA_STD_NAMESPACE cuda::std
 #else
     #define GA_HOST_DEVICE
+    #include <array>
+    #include <iterator>
+    #include <tuple>
+    #define GA_STD_NAMESPACE std
 #endif
 
 #include <algorithm>
@@ -105,7 +113,7 @@ namespace ga {
     using associative_container_t = std::map<bitset_t, ValueType>;
 
     template<typename EntryType, std::size_t Size>
-    using sequence_container_t = std::array<EntryType, Size>;
+    using sequence_container_t = GA_STD_NAMESPACE::array<EntryType, Size>;
 
 }
 

@@ -245,8 +245,8 @@ namespace ga {
         struct _trivial_assign<component<InputConstantCoefficient, constant_basis_blade<CommonBasisVectors> >, component<stored_value, constant_basis_blade<CommonBasisVectors> > > {
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr const &, InputBitsetCItr const &, InputMapCItr const &, ResultValueItr &result_value_itr, ResultBitsetItr const &, ResultMapItr const &) {
-                *result_value_itr = InputConstantCoefficient::template eval<0, 0>(std::make_tuple());
-                std::advance(result_value_itr, 1);
+                *result_value_itr = InputConstantCoefficient::template eval<0, 0>(GA_STD_NAMESPACE::make_tuple());
+                GA_STD_NAMESPACE::advance(result_value_itr, 1);
             }
         };
 
@@ -255,8 +255,8 @@ namespace ga {
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr &input_value_itr, InputBitsetCItr const &, InputMapCItr const &, ResultValueItr &result_value_itr, ResultBitsetItr const &, ResultMapItr const &) {
                 *result_value_itr = *input_value_itr;
-                std::advance(input_value_itr, 1);
-                std::advance(result_value_itr, 1);
+                GA_STD_NAMESPACE::advance(input_value_itr, 1);
+                GA_STD_NAMESPACE::advance(result_value_itr, 1);
             }
         };
 
@@ -268,8 +268,8 @@ namespace ga {
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr const &, InputBitsetCItr &input_bitset_itr, InputMapCItr const &, ResultValueItr const &, ResultBitsetItr &result_bitset_itr, ResultMapItr const &) {
                 *result_bitset_itr = *input_bitset_itr;
-                std::advance(input_bitset_itr, 1);
-                std::advance(result_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(input_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(result_bitset_itr, 1);
             }
         };
 
@@ -279,12 +279,12 @@ namespace ga {
 
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr const &, InputBitsetCItr &input_bitset_itr, InputMapCItr const &, ResultValueItr &result_value_itr, ResultBitsetItr &result_bitset_itr, ResultMapItr const &) {
-                *result_value_itr = InputConstantCoefficient::template eval<0, 0>(std::make_tuple());
-                std::advance(result_value_itr, 1);
+                *result_value_itr = InputConstantCoefficient::template eval<0, 0>(GA_STD_NAMESPACE::make_tuple());
+                GA_STD_NAMESPACE::advance(result_value_itr, 1);
 
                 *result_bitset_itr = *input_bitset_itr;
-                std::advance(input_bitset_itr, 1);
-                std::advance(result_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(input_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(result_bitset_itr, 1);
             }
         };
 
@@ -295,12 +295,12 @@ namespace ga {
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr &input_value_itr, InputBitsetCItr &input_bitset_itr, InputMapCItr const &, ResultValueItr &result_value_itr, ResultBitsetItr &result_bitset_itr, ResultMapItr const &) {
                 *result_value_itr = *input_value_itr;
-                std::advance(input_value_itr, 1);
-                std::advance(result_value_itr, 1);
+                GA_STD_NAMESPACE::advance(input_value_itr, 1);
+                GA_STD_NAMESPACE::advance(result_value_itr, 1);
 
                 *result_bitset_itr = *input_bitset_itr;
-                std::advance(input_bitset_itr, 1);
-                std::advance(result_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(input_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(result_bitset_itr, 1);
             }
         };
 
@@ -311,9 +311,9 @@ namespace ga {
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr const &, InputBitsetCItr &input_bitset_itr, InputMapCItr const &, ResultValueItr const &, ResultBitsetItr const &, ResultMapItr &result_map_itr) {
                 result_map_itr->clear();
-                result_map_itr->emplace(*input_bitset_itr, InputConstantCoefficient::template eval<0, 0>(std::make_tuple()));
-                std::advance(input_bitset_itr, 1);
-                std::advance(result_map_itr, 1);
+                result_map_itr->emplace(*input_bitset_itr, InputConstantCoefficient::template eval<0, 0>(GA_STD_NAMESPACE::make_tuple()));
+                GA_STD_NAMESPACE::advance(input_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(result_map_itr, 1);
             }
         };
 
@@ -325,8 +325,8 @@ namespace ga {
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr &input_value_itr, InputBitsetCItr &input_bitset_itr, InputMapCItr const &, ResultValueItr const &, ResultBitsetItr const &, ResultMapItr &result_map_itr) {
                 result_map_itr->clear();
                 result_map_itr->emplace(*input_bitset_itr, *input_value_itr);
-                std::advance(input_bitset_itr, 1);
-                std::advance(result_map_itr, 1);
+                GA_STD_NAMESPACE::advance(input_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(result_map_itr, 1);
             }
         };
 
@@ -337,8 +337,8 @@ namespace ga {
             template<typename InputValueCItr, typename InputBitsetCItr, typename InputMapCItr, typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(InputValueCItr const &, InputBitsetCItr const &, InputMapCItr &input_map_itr, ResultValueItr const &, ResultBitsetItr const &, ResultMapItr &result_map_itr) {
                 *result_map_itr = *input_map_itr;
-                std::advance(input_map_itr, 1);
-                std::advance(result_map_itr, 1);
+                GA_STD_NAMESPACE::advance(input_map_itr, 1);
+                GA_STD_NAMESPACE::advance(result_map_itr, 1);
             }
         };
 
@@ -347,7 +347,7 @@ namespace ga {
             template<typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(ResultValueItr &result_value_itr, ResultBitsetItr const &, ResultMapItr const &) {
                 *result_value_itr = 0;
-                std::advance(result_value_itr, 1);
+                GA_STD_NAMESPACE::advance(result_value_itr, 1);
             }
         };
 
@@ -356,10 +356,10 @@ namespace ga {
             template<typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(ResultValueItr &result_value_itr, ResultBitsetItr &result_bitset_itr, ResultMapItr const &) {
                 *result_value_itr = 0;
-                std::advance(result_value_itr, 1);
+                GA_STD_NAMESPACE::advance(result_value_itr, 1);
 
                 *result_bitset_itr = bitset_t(0);
-                std::advance(result_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(result_bitset_itr, 1);
             }
         };
 
@@ -368,7 +368,7 @@ namespace ga {
             template<typename ResultValueItr, typename ResultBitsetItr, typename ResultMapItr>
             GA_ALWAYS_INLINE GA_HOST_DEVICE constexpr static void run(ResultValueItr const &, ResultBitsetItr const &, ResultMapItr &result_map_itr) {
                 result_map_itr->clear();
-                std::advance(result_map_itr, 1);
+                GA_STD_NAMESPACE::advance(result_map_itr, 1);
             }
         };
 
@@ -380,7 +380,7 @@ namespace ga {
                 if (abs(*input_value_itr) > (typename std::iterator_traits<InputValueItr>::value_type)tol) {
                     throw bad_checked_copy_exception();
                 }
-                std::advance(input_value_itr, 1);
+                GA_STD_NAMESPACE::advance(input_value_itr, 1);
             }
         };
 
@@ -392,8 +392,8 @@ namespace ga {
                 if (abs(*input_value_itr) > (typename std::iterator_traits<InputValueItr>::value_type)tol) {
                     throw bad_checked_copy_exception();
                 }
-                std::advance(input_value_itr, 1);
-                std::advance(input_bitset_itr, 1);
+                GA_STD_NAMESPACE::advance(input_value_itr, 1);
+                GA_STD_NAMESPACE::advance(input_bitset_itr, 1);
             }
         };
 
@@ -407,7 +407,7 @@ namespace ga {
                         throw bad_checked_copy_exception();
                     }
                 }
-                std::advance(input_map_itr, 1);
+                GA_STD_NAMESPACE::advance(input_map_itr, 1);
             }
         };
 

@@ -174,7 +174,7 @@ namespace ga {
     // Makes a vector using the given iterator to provide the set of coordinates.
     template<typename MetricSpaceType, typename IteratorType, std::enable_if_t<detail::is_iterator_v<IteratorType>, int> = 0>
     GA_HOST_DEVICE constexpr decltype(auto) vector(metric_space<MetricSpaceType> const &mtr, IteratorType begin, IteratorType end) GA_NOEXCEPT {
-        assert(MetricSpaceType::vector_space_dimensions == std::distance(begin, end));
+        assert(MetricSpaceType::vector_space_dimensions == GA_STD_NAMESPACE::distance(begin, end));
         return detail::make_vector_using_iterator(mtr, begin, std::make_index_sequence<MetricSpaceType::vector_space_dimensions>{});
     }
 
