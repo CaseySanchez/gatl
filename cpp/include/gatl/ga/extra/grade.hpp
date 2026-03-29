@@ -39,8 +39,8 @@ namespace ga {
 
         using value_type = scalar_clifford_expression<grade_t, Value>;
 
-        GA_HOST_DEVICE constexpr grade_result(grade_result const &) = default;
-        GA_HOST_DEVICE constexpr grade_result(grade_result &&) = default;
+        constexpr grade_result(grade_result const &) = default;
+        constexpr grade_result(grade_result &&) = default;
 
         GA_HOST_DEVICE constexpr grade_result(value_type const &) GA_NOEXCEPT {
         }
@@ -62,8 +62,8 @@ namespace ga {
 
         using value_type = scalar_clifford_expression<grade_t, detail::stored_value>;
 
-        GA_HOST_DEVICE constexpr grade_result(grade_result const &) = default;
-        GA_HOST_DEVICE constexpr grade_result(grade_result &&) = default;
+        constexpr grade_result(grade_result const &) = default;
+        constexpr grade_result(grade_result &&) = default;
 
         GA_HOST_DEVICE constexpr grade_result(value_type const &value) GA_NOEXCEPT :
             value_(value) {
@@ -96,8 +96,8 @@ namespace ga {
 
         using value_type = scalar_clifford_expression<grade_t, detail::constant_value<GradeValue> >;
 
-        GA_HOST_DEVICE constexpr grade_result(grade_result const &) = default;
-        GA_HOST_DEVICE constexpr grade_result(grade_result &&) = default;
+        constexpr grade_result(grade_result const &) = default;
+        constexpr grade_result(grade_result &&) = default;
 
         GA_HOST_DEVICE constexpr grade_result(value_type const &) GA_NOEXCEPT {
         }

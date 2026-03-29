@@ -500,8 +500,8 @@ namespace ga {
 
             using input_type = clifford_expression<InputCoefficientType, InputExpression>;
 
-            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
-            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
+            constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
+            constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
 
             GA_HOST_DEVICE constexpr _super_lazy_context_input(input_type const &input) GA_NOEXCEPT :
                 input_(input) {
@@ -529,8 +529,8 @@ namespace ga {
 
             using input_type = clifford_expression<InputCoefficientType, InputExpression>;
 
-            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
-            GA_HOST_DEVICE constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
+            constexpr _super_lazy_context_input(_super_lazy_context_input const &) = default;
+            constexpr _super_lazy_context_input(_super_lazy_context_input &&) = default;
 
             GA_HOST_DEVICE constexpr _super_lazy_context_input(clifford_expression<InputCoefficientType, InputExpression> const &) GA_NOEXCEPT {
             }
@@ -572,8 +572,8 @@ namespace ga {
                 >;
             };
 
-            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context const &) = default;
-            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context &&) = default;
+            constexpr _super_lazy_context(_super_lazy_context const &) = default;
+            constexpr _super_lazy_context(_super_lazy_context &&) = default;
 
             GA_HOST_DEVICE constexpr _super_lazy_context(clifford_expression<InputCoefficientType, InputExpression> const &input, clifford_expression<OtherInputCoefficientTypes, OtherInputExpressions> const &... other_inputs) GA_NOEXCEPT :
                 super_input(input),
@@ -596,9 +596,9 @@ namespace ga {
         class _super_lazy_context<BaseTag> {
         public:
 
-            GA_HOST_DEVICE constexpr _super_lazy_context() = default;
-            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context const &) = default;
-            GA_HOST_DEVICE constexpr _super_lazy_context(_super_lazy_context &&) = default;
+            constexpr _super_lazy_context() = default;
+            constexpr _super_lazy_context(_super_lazy_context const &) = default;
+            constexpr _super_lazy_context(_super_lazy_context &&) = default;
 
             GA_HOST_DEVICE constexpr _super_lazy_context & operator=(_super_lazy_context const &) = delete;
             GA_HOST_DEVICE constexpr _super_lazy_context & operator=(_super_lazy_context &&) = delete;
@@ -638,8 +638,8 @@ namespace ga {
         template<std::size_t Index>
         using argument_expression_t = typename argument_t<Index>::expression_type;
 
-        GA_HOST_DEVICE constexpr lazy_context(lazy_context const &) = default;
-        GA_HOST_DEVICE constexpr lazy_context(lazy_context &&) = default;
+        constexpr lazy_context(lazy_context const &) = default;
+        constexpr lazy_context(lazy_context &&) = default;
 
         GA_HOST_DEVICE constexpr lazy_context(clifford_expression<InputCoefficientTypes, InputExpressions> const &... inputs) GA_NOEXCEPT :
             super(inputs...) {

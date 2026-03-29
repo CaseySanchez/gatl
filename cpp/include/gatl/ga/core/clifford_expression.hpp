@@ -177,8 +177,8 @@ namespace ga {
                 entries_{} {
             }
 
-            GA_HOST_DEVICE constexpr sequential_storage(sequential_storage const &) = default;
-            GA_HOST_DEVICE constexpr sequential_storage(sequential_storage &&) = default;
+            constexpr sequential_storage(sequential_storage const &) = default;
+            constexpr sequential_storage(sequential_storage &&) = default;
 
             template<typename... Args>
             GA_HOST_DEVICE constexpr sequential_storage(Args &&... args) GA_NOEXCEPT :
@@ -186,8 +186,8 @@ namespace ga {
                 static_assert(sizeof...(args) == Size, "The number of arguments must be equal to the number of stored data entries.");
             }
 
-            GA_HOST_DEVICE constexpr sequential_storage & operator=(sequential_storage const &) = default;
-            GA_HOST_DEVICE constexpr sequential_storage & operator=(sequential_storage &&) = default;
+            constexpr sequential_storage & operator=(sequential_storage const &) = default;
+            constexpr sequential_storage & operator=(sequential_storage &&) = default;
 
             GA_HOST_DEVICE constexpr decltype(auto) begin() GA_NOEXCEPT {
                 return entries_.begin();
@@ -237,8 +237,8 @@ namespace ga {
                 maps_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&values, bitset_storage_type &&bitsets, map_storage_type &&maps) GA_NOEXCEPT :
                 values_(std::move(values)),
@@ -246,8 +246,8 @@ namespace ga {
                 maps_(std::move(maps)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type & values() GA_NOEXCEPT {
                 return values_;
@@ -297,8 +297,8 @@ namespace ga {
                 maps_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&, bitset_storage_type &&bitsets, map_storage_type &&maps) GA_NOEXCEPT :
                 bitsets_(std::move(bitsets)),
@@ -310,8 +310,8 @@ namespace ga {
                 maps_(std::move(maps)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type values() const GA_NOEXCEPT {
                 return value_storage_type();
@@ -356,8 +356,8 @@ namespace ga {
                 maps_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&values, bitset_storage_type &&, map_storage_type &&maps) GA_NOEXCEPT :
                 values_(std::move(values)),
@@ -369,8 +369,8 @@ namespace ga {
                 maps_(std::move(maps)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type & values() GA_NOEXCEPT {
                 return values_;
@@ -414,8 +414,8 @@ namespace ga {
                 maps_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&, bitset_storage_type &&, map_storage_type &&maps) GA_NOEXCEPT :
                 maps_(std::move(maps)) {
@@ -425,8 +425,8 @@ namespace ga {
                 maps_(std::move(maps)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type values() const GA_NOEXCEPT {
                 return value_storage_type();
@@ -466,8 +466,8 @@ namespace ga {
                 bitsets_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&values, bitset_storage_type &&bitsets, map_storage_type &&) GA_NOEXCEPT :
                 values_(std::move(values)),
@@ -479,8 +479,8 @@ namespace ga {
                 bitsets_(std::move(bitsets)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type & values() GA_NOEXCEPT {
                 return values_;
@@ -524,8 +524,8 @@ namespace ga {
                 bitsets_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&, bitset_storage_type &&bitsets, map_storage_type &&) GA_NOEXCEPT :
                 bitsets_(std::move(bitsets)) {
@@ -535,8 +535,8 @@ namespace ga {
                 bitsets_(std::move(bitsets)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type values() const GA_NOEXCEPT {
                 return value_storage_type();
@@ -575,8 +575,8 @@ namespace ga {
                 values_{} {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&values, bitset_storage_type &&, map_storage_type &&) GA_NOEXCEPT :
                 values_(std::move(values)) {
@@ -586,8 +586,8 @@ namespace ga {
                 values_(std::move(values)) {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type & values() GA_NOEXCEPT {
                 return values_;
@@ -622,15 +622,15 @@ namespace ga {
             using bitset_storage_type = sequential_storage<bitset_type, 0>;
             using map_storage_type = sequential_storage<map_type, 0>;
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression() = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression() = default;
+            constexpr _super_clifford_expression(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr _super_clifford_expression(value_storage_type &&, bitset_storage_type &&, map_storage_type &&) GA_NOEXCEPT {
             }
 
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
-            GA_HOST_DEVICE constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression const &) = default;
+            constexpr _super_clifford_expression & operator=(_super_clifford_expression &&) = default;
 
             GA_HOST_DEVICE constexpr value_storage_type values() const GA_NOEXCEPT {
                 return value_storage_type();
@@ -692,9 +692,9 @@ namespace ga {
         using super::bitsets;
         using super::maps;
 
-        GA_HOST_DEVICE constexpr clifford_expression() = default;
-        GA_HOST_DEVICE constexpr clifford_expression(clifford_expression const &) = default;
-        GA_HOST_DEVICE constexpr clifford_expression(clifford_expression &&) = default;
+        constexpr clifford_expression() = default;
+        constexpr clifford_expression(clifford_expression const &) = default;
+        constexpr clifford_expression(clifford_expression &&) = default;
 
         template<typename OtherCoefficientType, typename OtherExpression>
         GA_HOST_DEVICE clifford_expression(clifford_expression<OtherCoefficientType, OtherExpression> const &other) GA_NOEXCEPT;
@@ -707,8 +707,8 @@ namespace ga {
             super(std::move(args)...) {
         }
 
-        GA_HOST_DEVICE constexpr clifford_expression & operator=(clifford_expression const &) = default;
-        GA_HOST_DEVICE constexpr clifford_expression & operator=(clifford_expression &&) = default;
+        constexpr clifford_expression & operator=(clifford_expression const &) = default;
+        constexpr clifford_expression & operator=(clifford_expression &&) = default;
 
         template<typename Type, std::enable_if_t<!is_clifford_expression_v<Type> && detail::is_scalar_component_v<Expression> && detail::can_be_stored_v<Expression>, int> = 0>
         GA_HOST_DEVICE constexpr operator Type() const GA_NOEXCEPT {
